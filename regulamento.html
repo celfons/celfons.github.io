@@ -13,14 +13,125 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const config  = {
+    apiKey: "AIzaSyAIrmkEIz4DMo04aNuXlEkNfBwBmCoZqqA",
+    authDomain: "maromba-foods.firebaseapp.com",
+    projectId: "maromba-foods",
+    storageBucket: "maromba-foods.appspot.com",
+    messagingSenderId: "1073190083768",
+    appId: "1:1073190083768:web:11da741cc4c627a991684d",
+    measurementId: "G-1GL4QYSDP4"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(config );
+  const analytics = getAnalytics(app);
+  
+  firebase.initializeApp(config);
+
+//Reference messages collection
+let messagesRef = firebase.database().ref('messages');
+
+//listen to form
+document.getElementById('contactForm').addEventListener('submit', submitForm);
+
+function submitForm(e){
+    e.preventDefault();
+
+    // get Values
+    let name = getInputVal('name');
+    let company = getInputVal('company');
+    let email = getInputVal('email');
+    let phone = getInputVal('phone');
+    let message = getInputVal('message');
+
+    //save message
+
+    saveMessage(name, company, email, phone, message);
+
+    //show alert
+    document.querySelector('.alert').style.display='block';
+
+    //Hide alert after 3 s
+    setTimeout(function(){
+        document.querySelector('.alert').style.display='none';
+    }, 3000)
+    //clear form
+    document.getElementById('contactForm').reset();
+}
+//function to get form values
+
+function getInputVal(id){
+    return document.getElementById(id).value;
+}
+
+//save message to firebase
+function saveMessage(name, company, email, phone, message){
+    let newMessageRef = messagesRef.push();
+    newMessageRef.set({
+        name: name,
+        company: company,
+        email: email,
+        phone: phone,
+        message: message
+    })
+}
+</script>
 <title>MAROMBA FOOD'S - Regulamento Cartão Fidelidade</title>
 </head>
 <body>
-<div class="container">
-<div class="row">
-  <h3>Após completar 20 compras em produtos do MarombaFoods, você ganha 20 R$ para consumo</h3> 
-</div>
-</div>
+ <div class="container">
+    <h1 class="brand"><span>Funny Co. </span> Web Design</h1>
+    <div class="wrapper animated fadeInUp">
+      <div class="company-info">
+        <h3>This is a serious Company</h3>
+        <ul>
+          <li><i class="fa fa-road"></i> 1024 Random Rd</li>
+          <li><i class="fa fa-phone"></i> +33 333 3333333</li>
+          <li><i class="fa fa-envelope"></i> serious@email.com</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>Email Us</h3>
+        <div class="alert">Your message has been sent</div>
+        <form id="contactForm">
+          <p>
+            <label>Name</label>
+            <input type="text" name="name" id="name" required>
+          </p>
+          <p>
+            <label>Company</label>
+            <input type="text" name="company" id="company">
+          </p>
+          <p>
+            <label>Email Address</label>
+            <input type="email" name="email" id="email" required>
+          </p>
+          <p>
+            <label>Phone Number</label>
+            <input type="text" name="phone" id="phone">
+          </p>
+          <p class="full">
+            <label>Message</label>
+            <textarea name="message" id="message" rows="5"></textarea>
+          </p>
+          <p class="full">
+            <button type="submit">Submit</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
 <footer class="navbar navbar-fixed-bottom">
 <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
 © 2020 Copyright:

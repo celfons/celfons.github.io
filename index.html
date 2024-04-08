@@ -21,7 +21,7 @@
 
     <main role="main" class="container">
 
-        <form class="form-inline">
+        <form class="form-inline" id="contactForm">
             <div class="form-group mb-2">
                 <input type="text" id="name" placeholder="Nome" class="form-control" required>
                 <input type="email" id="email" placeholder="Email" class="form-control" required>
@@ -42,63 +42,62 @@
             };
     
             // Inicialize o Firebase
-            firebase.initializeApp(firebaseConfig);
-    
-            const db = firebase.firestore();
-    
-            const contactForm = document.getElementById('contactForm');
-            const contactList = document.getElementById('contactList');
-    
-            // Função para adicionar um contato
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-    
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-    
-                db.collection("contacts").add({
-                    name: name,
-                    email: email
-                })
-                .then(function(docRef) {
-                    console.log("Contato adicionado com ID: ", docRef.id);
-                    contactForm.reset();
-                })
-                .catch(function(error) {
-                    console.error("Erro ao adicionar contato: ", error);
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.database();
+
+        const contactForm = $('#contactForm');
+        const contactList = $('#contactList');
+
+        // Função para adicionar um contato
+        contactForm.on('submit', function(event) {
+            event.preventDefault();
+
+            const name = $('#name').val();
+            const email = $('#email').val();
+
+            db.ref("contacts").push({
+                name: name,
+                email: email
+            })
+            .then(function() {
+                console.log("Contato adicionado com sucesso!");
+                contactForm[0].reset();
+            })
+            .catch(function(error) {
+                console.error("Erro ao adicionar contato: ", error);
+            });
+        });
+
+        // Função para exibir os contatos
+        function displayContacts() {
+            db.ref("contacts").on("value", function(snapshot) {
+                contactList.empty();
+                snapshot.forEach(function(childSnapshot) {
+                    const contact = childSnapshot.val();
+                    const li = $('<li>').text(`${contact.name} - ${contact.email}`);
+                    const deleteButton = $('<button>').text('Delete');
+                    deleteButton.on('click', function() {
+                        deleteContact(childSnapshot.key);
+                    });
+                    li.append(deleteButton);
+                    contactList.append(li);
                 });
             });
-    
-            // Função para exibir os contatos
-            function displayContacts() {
-                db.collection("contacts").onSnapshot(function(querySnapshot) {
-                    contactList.innerHTML = "";
-                    querySnapshot.forEach(function(doc) {
-                        const contact = doc.data();
-                        const li = document.createElement('li');
-                        li.textContent = `${contact.name} - ${contact.email}`;
-                        const deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Excluir';
-                        deleteButton.addEventListener('click', function() {
-                            deleteContact(doc.id);
-                        });
-                        li.appendChild(deleteButton);
-                        contactList.appendChild(li);
-                    });
-                });
-            }
-    
-            // Função para excluir um contato
-            function deleteContact(id) {
-                db.collection("contacts").doc(id).delete().then(function() {
-                    console.log("Contato excluído com sucesso!");
-                }).catch(function(error) {
-                    console.error("Erro ao excluir contato: ", error);
-                });
-            }
-    
-            // Exibir os contatos ao carregar a página
-            displayContacts();
+        }
+
+        // Função para excluir um contato
+        function deleteContact(id) {
+            db.ref("contacts/" + id).remove()
+            .then(function() {
+                console.log("Contato excluído com sucesso!");
+            }).catch(function(error) {
+                console.error("Erro ao excluir contato: ", error);
+            });
+        }
+
+        // Exibir os contatos ao carregar a página
+        displayContacts();
         </script>
 
     </main><!-- /.container -->
@@ -111,6 +110,6 @@
     <script src="assets/js/vendor/popper.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js"></script>
   </body>
 </html>

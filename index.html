@@ -25,24 +25,88 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cadastro</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Clientes</a>
-          </li>
-        </ul>
       </div>
     </nav>
 
     <main role="main" class="container">
 
-      <div class="starter-template">
-      </div>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Nome" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit">Adicionar</button>
+        </form>
+        
+        <ul id="contactList"></ul>
+    
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyAgce2fFgDwrDqhH_K9y7mP9F7vBZVv_Uo",
+                authDomain: "mundo-aliancas.firebaseapp.com",
+                projectId: "mundo-aliancas",
+                storageBucket: "mundo-aliancas.appspot.com",
+                messagingSenderId: "874201609919",
+                appId: "1:874201609919:web:68657a34e873b5ba1af80a"
+            };
+    
+            // Inicialize o Firebase
+            firebase.initializeApp(firebaseConfig);
+    
+            const db = firebase.firestore();
+    
+            const contactForm = document.getElementById('contactForm');
+            const contactList = document.getElementById('contactList');
+    
+            // Função para adicionar um contato
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+    
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+    
+                db.collection("contacts").add({
+                    name: name,
+                    email: email
+                })
+                .then(function(docRef) {
+                    console.log("Contato adicionado com ID: ", docRef.id);
+                    contactForm.reset();
+                })
+                .catch(function(error) {
+                    console.error("Erro ao adicionar contato: ", error);
+                });
+            });
+    
+            // Função para exibir os contatos
+            function displayContacts() {
+                db.collection("contacts").onSnapshot(function(querySnapshot) {
+                    contactList.innerHTML = "";
+                    querySnapshot.forEach(function(doc) {
+                        const contact = doc.data();
+                        const li = document.createElement('li');
+                        li.textContent = `${contact.name} - ${contact.email}`;
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Excluir';
+                        deleteButton.addEventListener('click', function() {
+                            deleteContact(doc.id);
+                        });
+                        li.appendChild(deleteButton);
+                        contactList.appendChild(li);
+                    });
+                });
+            }
+    
+            // Função para excluir um contato
+            function deleteContact(id) {
+                db.collection("contacts").doc(id).delete().then(function() {
+                    console.log("Contato excluído com sucesso!");
+                }).catch(function(error) {
+                    console.error("Erro ao excluir contato: ", error);
+                });
+            }
+    
+            // Exibir os contatos ao carregar a página
+            displayContacts();
+        </script>
 
     </main><!-- /.container -->
 
@@ -53,5 +117,7 @@
     <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="assets/js/vendor/popper.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js"></script>
   </body>
 </html>

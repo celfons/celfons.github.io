@@ -50,7 +50,7 @@
             <form class="form" id="contactForm">
                 <div class="form-group mb-2">
                     <input type="text" id="name" placeholder="Nome" class="form-control" required>
-                    <input type="email" id="email" placeholder="Email" class="form-control" required>
+                    <input type="email" id="email" placeholder="Email" class="form-control">
                     <input type="tel" id="tel" placeholder="Telefone" class="form-control" required>
                     <input type="date" id="date1" placeholder="Email" class="form-control" required>
                     <input type="date" id="date2" placeholder="Email" class="form-control">
@@ -65,9 +65,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Telefone</th>
-                        <th>Data 1</th>
-                        <th>Data 2</th>
-                        <th>Data 3</th>
+                        <th>Datas</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -106,9 +104,7 @@
                     name: name,
                     email: email,
                     tel: tel,
-                    date1: date1,
-                    date2: date2,
-                    date3: date3
+                    dates: [date1, date2, date3]
                 })
                 .then(function() {
                     console.log("Contato adicionado com sucesso!");
@@ -128,10 +124,11 @@
                         const tr = $('<tr>');
                         $('<td>').text(contact.name).appendTo(tr);
                         $('<td>').text(contact.email).appendTo(tr);
-                        $('<td>').text(contact.tel).appendTo(tr);    
-                        $('<td>').text(contact.date1).appendTo(tr);
-                        $('<td>').text(contact.date2).appendTo(tr);
-                        $('<td>').text(contact.date3).appendTo(tr);     
+                        $('<td>').text(contact.tel).appendTo(tr);   
+                        const arraySemVazios = contact.dates.filter(function(valor) {
+                            return valor !== "";
+                        }); 
+                        $('<td>').text(arraySemVazios).appendTo(tr);
                         const deleteButton = $('<button class="btn btn-danger">').text('Delete').on('click', function() {
                             deleteContact(childSnapshot.key);
                         });
@@ -157,6 +154,28 @@
             $('#openModal').on('click', function() {
                 $('#myModal').modal('show');
             });
+
+            $(document).ready(function() {
+                $('#myModal').on('shown.bs.modal', function () {
+                    const dateList = $('#dateList');
+                    const currentDate = new Date(); // Obtém a data atual
+                    currentDate.setDate(currentDate.getDate() - 7); // Subtrai 7 dias
+                    const lastWeekDate = currentDate.toISOString().slice(0, 10);
+                    db.ref("contacts").once("value").then(function(snapshot){
+                        dateList.empty();
+                        snapshot.forEach(function(childSnapshot) {
+                            const contact = childSnapshot.val();
+                            const dates = contact.dates;
+                            if (dates && dates.includes(lastWeekDate)) {
+                                const li = $('<li>').text(`${contact.name} - ${contact.tel}`);
+                                dateList.append(li);
+                            }
+                        });
+                    }).catch(function(error) {
+                        console.error("Erro ao buscar contatos: ", error);
+                    });;
+                });
+            });
             </script>
         </div>
     </main><!-- /.container -->
@@ -165,13 +184,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Data comemorativas da proxima semana</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    This is the content of the modal.
+                    <ul id="dateList"></ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

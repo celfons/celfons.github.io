@@ -21,10 +21,12 @@
 
     <main role="main" class="container">
 
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Nome" class="form-control" required>
-            <input type="email" id="email" placeholder="Email" class="form-control" required>
-            <button type="submit">Adicionar</button>
+        <form class="form-inline">
+            <div class="form-group mb-2">
+                <input type="text" id="name" placeholder="Nome" class="form-control" required>
+                <input type="email" id="email" placeholder="Email" class="form-control" required>
+                <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
+            </div>
         </form>
         
         <ul id="contactList"></ul>

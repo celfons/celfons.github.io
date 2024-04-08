@@ -36,8 +36,20 @@
             <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
         </form>
         
-        <ul id="contactList"></ul>
-    
+        <table id="contactTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Data 1</th>
+                    <th>Data 2</th>
+                    <th>Data 3</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="contactList"></tbody>
+        </table>    
         <script>
             const firebaseConfig = {
                 apiKey: "AIzaSyAgce2fFgDwrDqhH_K9y7mP9F7vBZVv_Uo",
@@ -90,13 +102,18 @@
                 contactList.empty();
                 snapshot.forEach(function(childSnapshot) {
                     const contact = childSnapshot.val();
-                    const li = $('<li>').text(`${contact.name} - ${contact.email}`);
-                    const deleteButton = $('<button>').text('Delete');
-                    deleteButton.on('click', function() {
+                    const tr = $('<tr>');
+                    $('<td>').text(contact.name).appendTo(tr);
+                    $('<td>').text(contact.email).appendTo(tr);
+                    $('<td>').text(contact.tel).appendTo(tr);    
+                    $('<td>').text(contact.date1).appendTo(tr);
+                    $('<td>').text(contact.date2).appendTo(tr);
+                    $('<td>').text(contact.date3).appendTo(tr);     
+                    const deleteButton = $('<button>').text('Delete').on('click', function() {
                         deleteContact(childSnapshot.key);
                     });
-                    li.append(deleteButton);
-                    contactList.append(li);
+                    $('<td>').append(deleteButton).appendTo(tr);
+                    contactList.append(tr);
                 });
             });
         }

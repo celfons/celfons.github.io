@@ -28,6 +28,10 @@
             <div class="form-group mb-2">
                 <input type="text" id="name" placeholder="Nome" class="form-control" required>
                 <input type="email" id="email" placeholder="Email" class="form-control" required>
+                <input type="tel" id="tel" placeholder="Telefone" class="form-control" required>
+                <input type="date" id="date1" placeholder="Email" class="form-control" required>
+                <input type="date" id="date2" placeholder="Email" class="form-control" required>
+                <input type="date" id="date3" placeholder="Email" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
         </form>
@@ -58,10 +62,18 @@
 
             const name = $('#name').val();
             const email = $('#email').val();
+            const tel = $('#tel').val();
+            const date1 = $('#date1').val();
+            const date2 = $('#date2').val();
+            const date3 = $('#date3').val();
 
             db.ref("contacts").push({
                 name: name,
-                email: email
+                email: email,
+                tel: tel,
+                date1: date1,
+                date2: date2,
+                date3: date3
             })
             .then(function() {
                 console.log("Contato adicionado com sucesso!");

@@ -14,10 +14,21 @@
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Adicione um padding superior ao corpo da página para compensar a altura da navbar */
+        body {
+            padding-top: 56px; /* Ajuste conforme necessário */
+        }
+    </style>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
   </head>
 
   <body class="text-center">
@@ -28,7 +39,7 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#openModal">Link</a>
+              <a class="nav-link" href="#" id="openModal">Notificações</a>
             </li>
           </ul>
         </div>
@@ -142,6 +153,10 @@
 
             // Exibir os contatos ao carregar a página
             displayContacts();
+
+            $('#openModal').on('click', function() {
+                $('#myModal').modal('show');
+            });
             </script>
         </div>
     </main><!-- /.container -->
@@ -164,18 +179,5 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
-    <script>
-        // Quando o link é clicado, abre o modal
-        $('#openModal').on('click', function() {
-            $('#myModal').modal('show');
-        });
-    </script>
   </body>
 </html>

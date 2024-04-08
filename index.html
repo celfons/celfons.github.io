@@ -23,7 +23,7 @@
   <body class="text-center">
 
     <main role="main" class="container">
-
+        <h3>Cadastro de clientes pós venda</h3>
         <form class="form" id="contactForm">
             <div class="form-group mb-2">
                 <input type="text" id="name" placeholder="Nome" class="form-control" required>
@@ -109,7 +109,7 @@
                     $('<td>').text(contact.date1).appendTo(tr);
                     $('<td>').text(contact.date2).appendTo(tr);
                     $('<td>').text(contact.date3).appendTo(tr);     
-                    const deleteButton = $('<button>').text('Delete').on('click', function() {
+                    const deleteButton = $('<button class="btn btn-danger">').text('Delete').on('click', function() {
                         deleteContact(childSnapshot.key);
                     });
                     $('<td>').append(deleteButton).appendTo(tr);

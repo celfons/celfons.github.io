@@ -48,29 +48,51 @@
         <div class="starter-template">
             <h3>Cadastro de clientes pós venda</h3>
             <form class="form" id="contactForm">
-                <div class="form-group mb-2">
-                    <input type="text" id="name" placeholder="Nome" class="form-control" required>
-                    <input type="email" id="email" placeholder="Email" class="form-control">
-                    <input type="tel" id="tel" placeholder="Telefone" class="form-control" required>
-                    <input type="date" id="date1" placeholder="Email" class="form-control" required>
-                    <input type="date" id="date2" placeholder="Email" class="form-control">
-                    <input type="date" id="date3" placeholder="Email" class="form-control">
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Nome:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="name" placeholder="Fulano da Silva" class="form-control" required>    
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" id="email" placeholder="fulano@gmail.com" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Telefone:</label>
+                    <div class="col-sm-10">
+                        <input type="tel" id="tel" placeholder="3499530185" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Data de casamento/namoro:</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="date-married" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Data de aniversario:</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="date-birthday" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Data de especial:</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="date-special" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Observação:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="obs" placeholder="Número da aliança 32" class="form-control">
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
             </form>
-            
-            <table class="table" id="contactTable">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Telefone</th>
-                        <th>Datas</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="contactList"></tbody>
-            </table>    
+              
             <script>
                 const firebaseConfig = {
                     apiKey: "AIzaSyAgce2fFgDwrDqhH_K9y7mP9F7vBZVv_Uo",
@@ -96,60 +118,26 @@
                 const name = $('#name').val();
                 const email = $('#email').val();
                 const tel = $('#tel').val();
-                const date1 = $('#date1').val();
-                const date2 = $('#date2').val();
-                const date3 = $('#date3').val();
+                const date1 = $('#date-married').val();
+                const date2 = $('#date-birthday').val();
+                const date3 = $('#date-special').val();
+                const obs = $('#obs').val();
 
                 db.ref("contacts").push({
                     name: name,
                     email: email,
                     tel: tel,
-                    dates: [date1, date2, date3]
+                    dates: [date1, date2, date3],
+                    obs: obs
                 })
                 .then(function() {
-                    console.log("Contato adicionado com sucesso!");
+                    alert("Contato adicionado com sucesso!");
                     contactForm[0].reset();
                 })
                 .catch(function(error) {
-                    console.error("Erro ao adicionar contato: ", error);
+                    alert("Erro ao adicionar contato: ", error);
                 });
             });
-
-            // Função para exibir os contatos
-            function displayContacts() {
-                db.ref("contacts").on("value", function(snapshot) {
-                    contactList.empty();
-                    snapshot.forEach(function(childSnapshot) {
-                        const contact = childSnapshot.val();
-                        const tr = $('<tr>');
-                        $('<td>').text(contact.name).appendTo(tr);
-                        $('<td>').text(contact.email).appendTo(tr);
-                        $('<td>').text(contact.tel).appendTo(tr);   
-                        const arraySemVazios = contact.dates.filter(function(valor) {
-                            return valor !== "";
-                        }); 
-                        $('<td>').text(arraySemVazios).appendTo(tr);
-                        const deleteButton = $('<button class="btn btn-danger">').text('Delete').on('click', function() {
-                            deleteContact(childSnapshot.key);
-                        });
-                        $('<td>').append(deleteButton).appendTo(tr);
-                        contactList.append(tr);
-                    });
-                });
-            }
-
-            // Função para excluir um contato
-            function deleteContact(id) {
-                db.ref("contacts/" + id).remove()
-                .then(function() {
-                    console.log("Contato excluído com sucesso!");
-                }).catch(function(error) {
-                    console.error("Erro ao excluir contato: ", error);
-                });
-            }
-
-            // Exibir os contatos ao carregar a página
-            displayContacts();
 
             $('#openModal').on('click', function() {
                 $('#myModal').modal('show');
@@ -167,8 +155,21 @@
                             const contact = childSnapshot.val();
                             const dates = contact.dates;
                             if (dates && dates.includes(lastWeekDate)) {
-                                const li = $('<li>').text(`${contact.name} - ${contact.tel}`);
-                                dateList.append(li);
+                                const index = dates.indexOf(lastWeekDate);
+                                let eventName = "";
+                                if(index == 0) {
+                                    eventName = "Data de casamento/namoro";
+                                } else if(index == 1) {
+                                    eventName = "Data de aniversario";
+                                } else {
+                                    eventName = "Data especial";
+                                }
+                                const tr = $('<tr>');
+                                $('<td>').text(contact.name).appendTo(tr);
+                                $('<td>').text(contact.tel).appendTo(tr); 
+                                $('<td>').text(contact.obs).appendTo(tr);     
+                                $('<td>').text(eventName).appendTo(tr);   
+                                dateList.append(tr);
                             }
                         });
                     }).catch(function(error) {
@@ -190,7 +191,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <ul id="dateList"></ul>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Telefone</th>
+                                <th>Observacao</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dateList"></tbody>
+                    </table>  
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

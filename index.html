@@ -98,6 +98,7 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            flex-wrap: wrap; /* Permite o ajuste para diferentes tamanhos de tela */
         }
 
         .sales-card img {
@@ -107,6 +108,7 @@
 
         .sales-card .product-details {
             text-align: left;
+            flex: 1; /* Isso ajuda a distribuir o espaço disponível */
         }
 
         .sales-card .product-details h3 {
@@ -123,6 +125,20 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #ff5a5f;
+            margin-bottom: 20px; /* Garante o espaço entre o preço e o botão */
+        }
+
+        .sales-card .cta-button {
+            background-color: #007bff;
+            font-size: 18px;
+            padding: 15px 40px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+            display: inline-block; /* Garante que o botão tenha o layout correto */
+        }
+
+        .sales-card .cta-button:hover {
+            background-color: #0056b3;
         }
 
         /* Rodapé */

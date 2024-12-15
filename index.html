@@ -6,6 +6,7 @@
     <meta name="description" content="Landing Page com Seção de Venda">
     <title>Landing Page com Seção de Venda</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
     <style>
         /* Resetando margens e preenchimento */
         * {
@@ -171,7 +172,12 @@
                 <h3>Produto Alma</h3>
                 <p>O produto Alma é uma jornada única de transformação, projetado para te ajudar a atingir seus objetivos pessoais e profissionais com mais clareza e propósito.</p>
                 <div class="price">R$ 299,99</div>
-                <a href="https://www.exemplo.com" class="cta-button">Comprar Agora</a>
+
+                <!-- Botão de Compra Integrado com Mercado Pago -->
+                <form action="https://www.mercadopago.com.br/checkout/v1/redirect" method="GET">
+                    <input type="hidden" name="preference_id" id="preference-id">
+                    <button type="submit" class="cta-button">Comprar Agora</button>
+                </form>
             </div>
         </div>
     </section>
@@ -180,6 +186,29 @@
     <footer>
         <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Inicializando Mercado Pago
+        const mp = new MercadoPago('YOUR_PUBLIC_KEY', {
+            locale: 'pt-BR'
+        });
+
+        // Criando uma preferência de pagamento
+        mp.preferences.create({
+            items: [
+                {
+                    title: 'Produto Alma',
+                    quantity: 1,
+                    currency_id: 'BRL',
+                    unit_price: 299.99
+                }
+            ]
+        }).then(function(response) {
+            document.getElementById('preference-id').value = response.body.id;
+        }).catch(function(error) {
+            console.error("Erro ao criar preferência:", error);
+        });
+    </script>
 
 </body>
 </html>

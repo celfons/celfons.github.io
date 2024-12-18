@@ -5,9 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Landing Page com Método Exclusivo da Mega Sena da Virada">
     <title>Método Exclusivo: Mega Sena da Virada</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <style>
+        /* Estilo Personalizado */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-image: url('https://via.placeholder.com/1200x600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-button {
+            background-color: #ff5a5f;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.125rem;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e94f50;
+        }
+
+        .highlight-section {
+            background-color: #fff5e6;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .highlight-section h2 {
+            color: #e74c3c;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .content-section {
+            padding: 40px 20px;
+        }
+
+        .content-section blockquote {
+            font-size: 1.125rem;
+            font-style: italic;
+            margin: 20px 0;
+            color: #555;
+        }
+
+        .sales-section {
+            background-color: #fff;
+            padding: 50px 20px;
+        }
+
+        .sales-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .sales-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff5a5f;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,38 +117,30 @@
     <header>
         <h1>Transforme sua Vida com Alma</h1>
         <p>Descubra seu potencial e viva uma nova jornada com nosso produto exclusivo.</p>
-        <a href="#sales" class="cta-button" aria-label="Veja o Produto">Veja o Produto</a>
+        <a href="#highlight" class="cta-button">Veja o Método</a>
     </header>
 
     <!-- Seção de Destaque -->
     <section id="highlight" class="highlight-section">
-        <div class="highlight-content">
-            <h2>PRESTE ATENÇÃO!</h2>
-            <p>Essa vai ser sua última chance de começar 2025 milionário!</p>
-            <p><strong>LEIA O TEXTO ABAIXO</strong> para descobrir por que estou divulgando esse método que vai te dar a chance de ganhar na Mega Sena da Virada.</p>
-        </div>
+        <h2>PRESTE ATENÇÃO!</h2>
+        <p>Essa vai ser sua última chance de começar 2025 milionário!</p>
+        <p><strong>LEIA O TEXTO ABAIXO</strong> para descobrir por que estou divulgando esse método que vai te dar a chance de ganhar na Mega Sena da Virada.</p>
     </section>
 
     <!-- Seção de Conteúdo Principal -->
     <section id="main-content" class="content-section">
-        <p>Tenho certeza que você está pensando:</p>
-        <blockquote>
-            “Se esse método dá certo... porque ela não aplica e fica milionária sozinha?”
-        </blockquote>
-        <p>Ai é que está: já apliquei e fui uma das ganhadoras.</p>
-        <blockquote>
-            “Então porque ela não aplica e ganha de novo?”
-        </blockquote>
-        <p>Porque estou cansada de ser enganada pelos políticos e poderosos desse país. E acho que você também deve estar!</p>
-        <p>Ou você acha que eles não têm pessoas infiltradas dentro do jogo para ganharem uma parcela desses milhões? Além de roubarem todo o nosso dinheiro com impostos. Você e eu somos enganados o tempo todo.</p>
-        <p>Por isso decidi compartilhar de uma vez por todas esse método, para que todos que acreditarem nele possam ganhar. Juntos, quebraremos a banca e colocaremos o dedo na ferida que mais dói: no bolso deles.</p>
-        <p>Mas acredito que você também deve se questionar:</p>
-        <blockquote>
-            “Se todo mundo aplicar esse método, não vai sobrar dinheiro, ou vai ser muito pouco?”
-        </blockquote>
-        <p>Ai que você se engana. Além do prêmio previsto ser de <strong>R$ 600.000.000,00 milhões</strong>, se 600 pessoas ganharem, ainda daria 1 milhão de reais para cada!</p>
-        <p>Mas não acredito que muitas pessoas irão acreditar no que estou falando. Por isso, você será o escolhido para fazer parte desse pequeno grupo que terá acesso ao conteúdo.</p>
-        <p>Imagine poder ficar milionário e de quebra fazer com que os políticos paguem o preço!</p>
+        <div class="container">
+            <p>Tenho certeza que você está pensando:</p>
+            <blockquote>
+                “Se esse método dá certo... porque ela não aplica e fica milionária sozinha?”
+            </blockquote>
+            <p>Ai é que está: já apliquei e fui uma das ganhadoras.</p>
+            <blockquote>
+                “Então porque ela não aplica e ganha de novo?”
+            </blockquote>
+            <p>Porque estou cansada de ser enganada pelos políticos e poderosos desse país. E acho que você também deve estar!</p>
+            <p>Ou você acha que eles não têm pessoas infiltradas dentro do jogo para ganharem uma parcela desses milhões? Além de roubarem todo o nosso dinheiro com impostos. Você e eu somos enganados o tempo todo.</p>
+        </div>
     </section>
 
     <!-- Seção de Vendas -->
@@ -58,13 +152,10 @@
                 <h3>Método Exclusivo</h3>
                 <p>Este método já foi aplicado e gerou resultados reais. Agora você pode ser um dos poucos escolhidos a mudar de vida.</p>
                 <div class="price">R$ 299,99</div>
-
-                <!-- Botão de Compra Integrado com Mercado Pago -->
                 <form action="https://www.mercadopago.com.br/checkout/v1/redirect" method="GET">
                     <input type="hidden" name="preference_id" id="preference-id">
-                    <button type="submit" class="cta-button" aria-label="Comprar agora">Comprar Agora</button>
+                    <button type="submit" class="btn btn-primary">Comprar Agora</button>
                 </form>
-                <p id="loading-message" style="display: none; color: #007bff;">Gerando link de pagamento...</p>
             </div>
         </div>
     </section>
@@ -74,6 +165,26 @@
         <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Inicializando Mercado Pago
+        const mp = new MercadoPago('YOUR_PUBLIC_KEY', { locale: 'pt-BR' });
+
+        // Criando uma preferência de pagamento
+        mp.preferences.create({
+            items: [
+                {
+                    title: 'Método Exclusivo',
+                    quantity: 1,
+                    currency_id: 'BRL',
+                    unit_price: 299.99
+                }
+            ]
+        }).then(function(response) {
+            document.getElementById('preference-id').value = response.body.id;
+        }).catch(function(error) {
+            console.error("Erro ao criar preferência:", error);
+        });
+    </script>
+
 </body>
 </html>

@@ -3,154 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Landing Page com Seção de Venda">
-    <title>Landing Page com Seção de Venda</title>
+    <meta name="description" content="Landing Page com Método Exclusivo da Mega Sena da Virada">
+    <title>Método Exclusivo: Mega Sena da Virada</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-    <style>
-        /* Resetando margens e preenchimento */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Estilos Globais */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Cabeçalho */
-        header {
-            background-image: url('https://via.placeholder.com/1200x600'); /* Imagem de fundo */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        header p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-
-        .cta-button {
-            background-color: #ff5a5f;
-            color: white;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #e94f50;
-        }
-
-        /* Seção de Vendas */
-        .sales-section {
-            padding: 80px 20px;
-            background-color: #fff;
-            text-align: center;
-        }
-
-        .sales-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .sales-section p {
-            font-size: 1.125rem;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .sales-card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            flex-wrap: wrap; /* Permite o ajuste para diferentes tamanhos de tela */
-        }
-
-        .sales-card img {
-            max-width: 250px;
-            margin-right: 30px;
-        }
-
-        .sales-card .product-details {
-            text-align: left;
-            flex: 1; /* Isso ajuda a distribuir o espaço disponível */
-        }
-
-        .sales-card .product-details h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .sales-card .product-details p {
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
-
-        .sales-card .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff5a5f;
-            margin-bottom: 20px; /* Garante o espaço entre o preço e o botão */
-        }
-
-        .sales-card .cta-button {
-            background-color: #007bff;
-            font-size: 18px;
-            padding: 15px 40px;
-            border-radius: 50px;
-            transition: background-color 0.3s ease;
-            display: inline-block; /* Garante que o botão tenha o layout correto */
-        }
-
-        .sales-card .cta-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -158,26 +15,56 @@
     <header>
         <h1>Transforme sua Vida com Alma</h1>
         <p>Descubra seu potencial e viva uma nova jornada com nosso produto exclusivo.</p>
-        <a href="#sales" class="cta-button">Veja o Produto</a>
+        <a href="#sales" class="cta-button" aria-label="Veja o Produto">Veja o Produto</a>
     </header>
+
+    <!-- Seção de Destaque -->
+    <section id="highlight" class="highlight-section">
+        <div class="highlight-content">
+            <h2>PRESTE ATENÇÃO!</h2>
+            <p>Essa vai ser sua última chance de começar 2025 milionário!</p>
+            <p><strong>LEIA O TEXTO ABAIXO</strong> para descobrir por que estou divulgando esse método que vai te dar a chance de ganhar na Mega Sena da Virada.</p>
+        </div>
+    </section>
+
+    <!-- Seção de Conteúdo Principal -->
+    <section id="main-content" class="content-section">
+        <p>Tenho certeza que você está pensando:</p>
+        <blockquote>
+            “Se esse método dá certo... porque ela não aplica e fica milionária sozinha?”
+        </blockquote>
+        <p>Ai é que está: já apliquei e fui uma das ganhadoras.</p>
+        <blockquote>
+            “Então porque ela não aplica e ganha de novo?”
+        </blockquote>
+        <p>Porque estou cansada de ser enganada pelos políticos e poderosos desse país. E acho que você também deve estar!</p>
+        <p>Ou você acha que eles não têm pessoas infiltradas dentro do jogo para ganharem uma parcela desses milhões? Além de roubarem todo o nosso dinheiro com impostos. Você e eu somos enganados o tempo todo.</p>
+        <p>Por isso decidi compartilhar de uma vez por todas esse método, para que todos que acreditarem nele possam ganhar. Juntos, quebraremos a banca e colocaremos o dedo na ferida que mais dói: no bolso deles.</p>
+        <p>Mas acredito que você também deve se questionar:</p>
+        <blockquote>
+            “Se todo mundo aplicar esse método, não vai sobrar dinheiro, ou vai ser muito pouco?”
+        </blockquote>
+        <p>Ai que você se engana. Além do prêmio previsto ser de <strong>R$ 600.000.000,00 milhões</strong>, se 600 pessoas ganharem, ainda daria 1 milhão de reais para cada!</p>
+        <p>Mas não acredito que muitas pessoas irão acreditar no que estou falando. Por isso, você será o escolhido para fazer parte desse pequeno grupo que terá acesso ao conteúdo.</p>
+        <p>Imagine poder ficar milionário e de quebra fazer com que os políticos paguem o preço!</p>
+    </section>
 
     <!-- Seção de Vendas -->
     <section id="sales" class="sales-section">
-        <h2>Nosso Produto Exclusivo</h2>
-        <p>O "Alma" é uma ferramenta poderosa para o autoconhecimento e transformação pessoal. Descubra tudo o que ele pode fazer por você.</p>
-
+        <h2>TER ACESSO AO MÉTODO NOVO GANHADOR DA MEGA DA VIRADA!</h2>
         <div class="sales-card">
-            <img src="https://via.placeholder.com/250" alt="Produto Alma">
+            <img src="https://via.placeholder.com/250" alt="Imagem do Método Mega Sena">
             <div class="product-details">
-                <h3>Produto Alma</h3>
-                <p>O produto Alma é uma jornada única de transformação, projetado para te ajudar a atingir seus objetivos pessoais e profissionais com mais clareza e propósito.</p>
+                <h3>Método Exclusivo</h3>
+                <p>Este método já foi aplicado e gerou resultados reais. Agora você pode ser um dos poucos escolhidos a mudar de vida.</p>
                 <div class="price">R$ 299,99</div>
 
                 <!-- Botão de Compra Integrado com Mercado Pago -->
                 <form action="https://www.mercadopago.com.br/checkout/v1/redirect" method="GET">
                     <input type="hidden" name="preference_id" id="preference-id">
-                    <button type="submit" class="cta-button">Comprar Agora</button>
+                    <button type="submit" class="cta-button" aria-label="Comprar agora">Comprar Agora</button>
                 </form>
+                <p id="loading-message" style="display: none; color: #007bff;">Gerando link de pagamento...</p>
             </div>
         </div>
     </section>
@@ -187,28 +74,6 @@
         <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
 
-    <script>
-        // Inicializando Mercado Pago
-        const mp = new MercadoPago('YOUR_PUBLIC_KEY', {
-            locale: 'pt-BR'
-        });
-
-        // Criando uma preferência de pagamento
-        mp.preferences.create({
-            items: [
-                {
-                    title: 'Produto Alma',
-                    quantity: 1,
-                    currency_id: 'BRL',
-                    unit_price: 299.99
-                }
-            ]
-        }).then(function(response) {
-            document.getElementById('preference-id').value = response.body.id;
-        }).catch(function(error) {
-            console.error("Erro ao criar preferência:", error);
-        });
-    </script>
-
+    <script src="scripts.js"></script>
 </body>
 </html>

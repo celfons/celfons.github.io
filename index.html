@@ -16,29 +16,16 @@
         }
 
         header {
-            position: relative;
-            text-align: center;
+            background-image: url('https://i.ibb.co/HVsWGz3/6fbebc47-c282-4a8e-a6d3-e7714458362b.jpg');
+            background-size: cover;
+            background-position: center;
             color: white;
+            text-align: center;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.ibb.co/HVsWGz3/6fbebc47-c282-4a8e-a6d3-e7714458362b.jpg');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.6); /* Para melhorar contraste com o texto */
+            position: relative;
         }
 
         header h1 {
@@ -65,15 +52,6 @@
             background-color: #e94f50;
         }
 
-        /* Botão flutuante abaixo do header */
-        .floating-btn {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-
         .highlight-section {
             background-color: #fff5e6;
             padding: 50px 20px;
@@ -88,6 +66,13 @@
 
         .content-section {
             padding: 40px 20px;
+        }
+
+        .content-section blockquote {
+            font-size: 1.125rem;
+            font-style: italic;
+            margin: 20px 0;
+            color: #555;
         }
 
         .sales-section {
@@ -105,19 +90,39 @@
             text-align: center;
         }
 
+        .sales-card img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff5a5f;
+            margin-bottom: 20px;
+        }
+
         footer {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
             text-align: center;
         }
+
+        /* Botão flutuante abaixo do header */
+        .floating-btn {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
     <!-- Cabeçalho -->
     <header>
-        <h1>Ganhe na Mega Sena da Virada</h1>
-        <p>Descubra o método que pode mudar sua vida e te tornar milionário!</p>
         <a href="#sales" class="btn btn-danger btn-lg floating-btn">Quero adquirir o método</a>
     </header>
 
@@ -157,5 +162,6 @@
     <footer>
         <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
+
 </body>
 </html>

@@ -19,8 +19,6 @@
             background-image: url('https://i.ibb.co/RHCZvMp/E58-D9-E2-E-3529-4-E89-A5-F5-071-C31-E52-F33.webp');
             background-size: cover;
             background-position: center;
-            color: white;
-            text-align: center;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -28,27 +26,23 @@
             position: relative;
         }
 
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        header p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .cta-button {
+        .floating-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background-color: #ff5a5f;
             color: white;
             padding: 15px 30px;
             font-size: 1.125rem;
             border-radius: 50px;
             transition: background-color 0.3s ease;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 10;
         }
 
-        .cta-button:hover {
+        .floating-btn:hover {
             background-color: #e94f50;
         }
 
@@ -62,17 +56,6 @@
             color: #e74c3c;
             font-size: 2rem;
             margin-bottom: 20px;
-        }
-
-        .content-section {
-            padding: 40px 20px;
-        }
-
-        .content-section blockquote {
-            font-size: 1.125rem;
-            font-style: italic;
-            margin: 20px 0;
-            color: #555;
         }
 
         .sales-section {
@@ -90,57 +73,24 @@
             text-align: center;
         }
 
-        .sales-card img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff5a5f;
-            margin-bottom: 20px;
-        }
-
         footer {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
             text-align: center;
         }
-
-        /* Botão flutuante abaixo do header */
-        .floating-btn {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
     </style>
 </head>
 <body>
     <!-- Cabeçalho -->
     <header>
-        <a href="#sales" class="btn btn-danger btn-lg floating-btn">Quero adquirir o método</a>
+        <a href="#sales" class="floating-btn">Quero adquirir o método</a>
     </header>
 
     <!-- Seção de Destaque -->
     <section id="highlight" class="highlight-section">
         <h2>PRESTE ATENÇÃO!</h2>
         <p>Essa vai ser sua última chance de começar 2025 milionário!</p>
-    </section>
-
-    <!-- Seção de Conteúdo Principal -->
-    <section id="main-content" class="content-section">
-        <div class="container">
-            <p>Tenho certeza que você está pensando:</p>
-            <blockquote>
-                “Se esse método dá certo... porque ela não aplica e fica milionária sozinha?”
-            </blockquote>
-            <p>Ai é que está: já apliquei e fui uma das ganhadoras.</p>
-        </div>
     </section>
 
     <!-- Seção de Vendas -->
@@ -162,6 +112,5 @@
     <footer>
         <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
-
 </body>
 </html>

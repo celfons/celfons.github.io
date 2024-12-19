@@ -25,7 +25,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            position: relative;
         }
 
         header h1 {
@@ -109,13 +109,27 @@
             padding: 20px 0;
             text-align: center;
         }
+
+        /* Botão flutuante abaixo do header */
+        .floating-btn {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
-    <header></header>
+    <!-- Cabeçalho -->
+    <header>
+        <a href="#sales" class="btn btn-danger btn-lg floating-btn">Quero adquirir o método</a>
+    </header>
+
     <!-- Seção de Destaque -->
     <section id="highlight" class="highlight-section">
-        <a href="#sales" class="btn btn-danger mt-3">Quero adquirir a método</a>
+        <h2>PRESTE ATENÇÃO!</h2>
+        <p>Essa vai ser sua última chance de começar 2025 milionário!</p>
     </section>
 
     <!-- Seção de Conteúdo Principal -->
@@ -126,11 +140,6 @@
                 “Se esse método dá certo... porque ela não aplica e fica milionária sozinha?”
             </blockquote>
             <p>Ai é que está: já apliquei e fui uma das ganhadoras.</p>
-            <blockquote>
-                “Então porque ela não aplica e ganha de novo?”
-            </blockquote>
-            <p>Porque estou cansada de ser enganada pelos políticos e poderosos desse país. E acho que você também deve estar!</p>
-            <p>Ou você acha que eles não têm pessoas infiltradas dentro do jogo para ganharem uma parcela desses milhões? Além de roubarem todo o nosso dinheiro com impostos. Você e eu somos enganados o tempo todo.</p>
         </div>
     </section>
 
@@ -141,10 +150,8 @@
             <img src="https://i.ibb.co/rM5gdv6/0f32a5ef-5497-47d4-9ac7-51f9db1ca6ee.jpg" alt="Imagem do Método Mega Sena">
             <div class="product-details">
                 <h3>Método Exclusivo</h3>
-                <p>Este método já foi aplicado e gerou resultados reais. Agora você pode ser um dos poucos escolhidos a mudar de vida.</p>
                 <div class="price">R$ 9,99</div>
                 <form action="https://www.mercadopago.com.br/checkout/v1/redirect" method="GET">
-                    <input type="hidden" name="preference_id" id="preference-id">
                     <button type="submit" class="btn btn-primary">Comprar Agora</button>
                 </form>
             </div>
@@ -155,27 +162,6 @@
     <footer>
         <p>&copy; 2024 Todos os direitos reservados.</p>
     </footer>
-
-    <script>
-        // Inicializando Mercado Pago
-        const mp = new MercadoPago('YOUR_PUBLIC_KEY', { locale: 'pt-BR' });
-
-        // Criando uma preferência de pagamento
-        mp.preferences.create({
-            items: [
-                {
-                    title: 'Método Exclusivo',
-                    quantity: 1,
-                    currency_id: 'BRL',
-                    unit_price: 9.99
-                }
-            ]
-        }).then(function(response) {
-            document.getElementById('preference-id').value = response.body.id;
-        }).catch(function(error) {
-            console.error("Erro ao criar preferência:", error);
-        });
-    </script>
 
 </body>
 </html>

@@ -697,7 +697,7 @@
         function sortearString() {
             const indiceAleatorio = Math.floor(Math.random() * strings.length);
             const stringSorteada = strings[indiceAleatorio];
-            document.getElementById("resultado").textContent = '<a href='${stringSorteada}">questao sorteada</a>';
+document.getElementById("resultado").innerHTML = `<a href="${stringSorteada}">Questão sorteada</a>`;
         }
 
         // Adiciona o evento de clique ao botão

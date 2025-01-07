@@ -1,202 +1,707 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Método Exclusivo para Ganhar na Mega Sena da Virada">
-    <title>Método Exclusivo: Mega Sena da Virada</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <title>Sorteador de Strings</title>
     <style>
-        /* Estilo Personalizado */
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        header {
-            background-image: url('https://i.ibb.co/w60y0CX/Seja-o-novo-milion-rio-1.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
+            font-family: Arial, sans-serif;
             text-align: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            margin-top: 50px;
         }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        header p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .cta-button {
-            background-color: #28a745; /* Verde chamativo */
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.125rem;
-            border-radius: 50px;
-            transition: background-color 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #218838;
-        }
-
-        .highlight-section {
-            background-color: #fff5e6;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .highlight-section h2 {
-            color: #e74c3c;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .highlight-section p {
-            font-weight: bold;
-        }
-
-        .content-section {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .content-section blockquote {
-            font-size: 1.125rem;
-            font-style: italic;
-            margin: 20px 0;
-            color: #555;
-        }
-
-        .content-section p:first-child {
-            color: white;
-            background-color: red;
-            display: inline;
-            padding: 5px;
-            font-weight: bold;
-        }
-
-        .sales-section {
-            background-color: #fff;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .sales-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .sales-card img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff5a5f;
-            margin-bottom: 10px;
-        }
-
-        .payment-info {
-            font-size: 1rem;
-            color: #28a745;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-
-        /* Botão flutuante abaixo do header */
-        .floating-btn {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-
-        .bold-red-box {
-            font-weight: bold;
-            color: white;
-            background-color: #ff0000;
+        button {
             padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <a href="#sales" class="btn btn-success btn-lg floating-btn">QUERO FICAR MILIONÁRIO EM 2025</a> 
-    </header>
-    <!-- Seção de Destaque -->
-    <section id="highlight" class="highlight-section">
-        <h2><strong><u>PRESTE ATENÇÃO!</u></strong></h2>
-        <p><strong>Essa vai ser sua última chance de começar 2025 milionário!</strong></p>
-        <a href="https://mpago.li/17EkDUM" class="btn btn-primary">Comprar Agora</a>
-    </section>
-    <!-- Seção de Conteúdo Principal -->
-    <section id="main-content" class="content-section">
-        <div class="container">
-            <p><strong>LEIA O TEXTO ABAIXO PARA DESCOBRIR O PORQUE ESTOU DIVULGANDO ESSE MÉTODO QUE VAI TER DAR A CHANCE DE GANHAR NA MEGA SENA DA VIRADA.</strong></p>
-            <p>Tenho certeza que você está pensando:</p>
-            <blockquote>
-                “Se esse método da certo... porque ela não aplica e fica milionária sozinha?”
-            </blockquote>
-        </div>
-    </section>
+    <h1>Sorteador de Strings</h1>
+    <p>Clique no botão para sortear uma string!</p>
+    <button id="sortear">Sortear</button>
+    <div id="resultado"></div>
 
-    <!-- Seção de Vendas -->
-    <section id="sales" class="sales-section">
-        <h2 class="bold-red-box">CLIQUE EM COMPRAR AGORA E AUMENTE SUAS CHANCES DE SER O NOVO MILIONÁRIO DE 2025</h2>
-        <div class="sales-card">
-            <img src="https://i.ibb.co/x7kMN8n/Seja-o-novo-milion-rio-3.png" alt="Imagem do Método Mega Sena">
-            <div class="product-details">
-                <h3>Método Exclusivo</h3>
-                <div class="price">R$ 24,90</div>
-                <div class="payment-info">Formas de pagamento: PIX, Boleto e cartão de crédito em até 6x sem juros!</div>
-                <!-- Botão Mercado Pago -->
-                <script 
-                    src="https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js"
-                    data-preference-id="419822666-ad3c8767-a2e2-4a8f-b89c-edc7ec11ff10" 
-                    data-source="button">
-                </script>
-            </div>
-        </div>
-    </section>
+    <script>
+        // Lista de strings para sortear
+        const strings = [
+            https://www.examtopics.com/discussions/microsoft/view/74900-exam-az-204-topic-1-question-1-discussion/",
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2024 Todos os direitos reservados.</p>
-    </footer>
+"https://www.examtopics.com/discussions/microsoft/view/74347-exam-az-204-topic-1-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/78733-exam-az-204-topic-1-question-3-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/57136-exam-az-204-topic-1-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58576-exam-az-204-topic-1-question-5-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56756-exam-az-204-topic-1-question-6-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56757-exam-az-204-topic-1-question-7-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74579-exam-az-204-topic-1-question-8-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56848-exam-az-204-topic-1-question-9-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58676-exam-az-204-topic-1-question-10-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58707-exam-az-204-topic-1-question-11-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79134-exam-az-204-topic-1-question-12-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79132-exam-az-204-topic-1-question-13-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58709-exam-az-204-topic-1-question-14-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/80380-exam-az-204-topic-1-question-15-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74918-exam-az-204-topic-1-question-16-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/57346-exam-az-204-topic-1-question-17-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58800-exam-az-204-topic-1-question-18-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/62874-exam-az-104-topic-1-question-19-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58123-exam-az-204-topic-1-question-20-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/57799-exam-az-204-topic-1-question-21-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/58153-exam-az-204-topic-1-question-23-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56568-exam-az-204-topic-1-question-24-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56565-exam-az-204-topic-1-question-25-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56564-exam-az-204-topic-1-question-26-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56566-exam-az-204-topic-1-question-27-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74583-exam-az-204-topic-1-question-29-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/57474-exam-az-204-topic-1-question-31-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/80921-exam-az-204-topic-1-question-32-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94167-exam-az-204-topic-1-question-33-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94170-exam-az-204-topic-1-question-34-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94172-exam-az-204-topic-1-question-35-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94386-exam-az-204-topic-1-question-36-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94244-exam-az-204-topic-1-question-37-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37489-exam-az-204-topic-2-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36239-exam-az-204-topic-2-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37322-exam-az-204-topic-2-question-3-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/24207-exam-az-204-topic-2-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/75829-exam-az-204-topic-2-question-5-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/75827-exam-az-204-topic-2-question-6-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/26296-exam-az-204-topic-2-question-8-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36993-exam-az-204-topic-2-question-9-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36564-exam-az-204-topic-2-question-10-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/75833-exam-az-204-topic-2-question-11-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/75839-exam-az-204-topic-2-question-12-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37003-exam-az-204-topic-2-question-13-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/35878-exam-az-204-topic-2-question-14-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36012-exam-az-204-topic-2-question-15-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/35691-exam-az-204-topic-2-question-16-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36991-exam-az-204-topic-2-question-17-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37868-exam-az-204-topic-2-question-18-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/26699-exam-az-204-topic-2-question-19-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/26836-exam-az-204-topic-2-question-20-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46808-exam-az-204-topic-2-question-21-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/44278-exam-az-204-topic-2-question-22-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46645-exam-az-204-topic-2-question-23-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46556-exam-az-204-topic-2-question-24-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46460-exam-az-204-topic-2-question-25-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47215-exam-az-204-topic-2-question-26-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/44062-exam-az-204-topic-2-question-27-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36395-exam-az-204-topic-2-question-28-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46816-exam-az-204-topic-2-question-29-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46474-exam-az-204-topic-2-question-30-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46817-exam-az-204-topic-2-question-31-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46481-exam-az-204-topic-2-question-32-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48956-exam-az-204-topic-2-question-33-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53966-exam-az-204-topic-2-question-34-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53965-exam-az-204-topic-2-question-35-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/35839-exam-az-204-topic-2-question-36-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/35819-exam-az-204-topic-2-question-37-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95492-exam-az-204-topic-6-question-38-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74387-exam-az-204-topic-2-question-39-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74608-exam-az-204-topic-2-question-40-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74610-exam-az-204-topic-2-question-41-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74777-exam-az-204-topic-2-question-42-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/78750-exam-az-204-topic-2-question-43-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/80541-exam-az-204-topic-2-question-44-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79110-exam-az-204-topic-2-question-45-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94360-exam-az-204-topic-2-question-46-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94362-exam-az-204-topic-2-question-48-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106633-exam-az-204-topic-2-question-49-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114442-exam-az-204-topic-2-question-50-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114443-exam-az-204-topic-2-question-51-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114554-exam-az-204-topic-2-question-52-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116829-exam-az-204-topic-2-question-53-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125273-exam-az-204-topic-2-question-54-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125384-exam-az-204-topic-2-question-55-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125274-exam-az-204-topic-2-question-56-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130403-exam-az-204-topic-2-question-57-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130475-exam-az-204-topic-2-question-58-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130461-exam-az-204-topic-2-question-59-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130476-exam-az-204-topic-2-question-61-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130495-exam-az-204-topic-2-question-62-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37399-exam-az-204-topic-3-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37262-exam-az-204-topic-3-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36534-exam-az-204-topic-3-question-3-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48852-exam-az-204-topic-3-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47173-exam-az-204-topic-3-question-5-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47403-exam-az-204-topic-3-question-6-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46892-exam-az-204-topic-3-question-7-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46919-exam-az-204-topic-3-question-8-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46962-exam-az-204-topic-3-question-9-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/28649-exam-az-204-topic-3-question-10-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/49088-exam-az-204-topic-3-question-11-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/49787-exam-az-204-topic-3-question-12-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36279-exam-az-204-topic-3-question-13-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36722-exam-az-204-topic-3-question-14-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36645-exam-az-204-topic-3-question-15-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37038-exam-az-204-topic-3-question-16-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37178-exam-az-204-topic-3-question-17-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37295-exam-az-204-topic-3-question-18-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53970-exam-az-204-topic-3-question-19-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56321-exam-az-204-topic-3-question-20-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74782-exam-az-204-topic-3-question-21-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74568-exam-az-204-topic-3-question-22-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74569-exam-az-204-topic-3-question-23-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74783-exam-az-204-topic-3-question-24-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79410-exam-az-204-topic-3-question-25-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79151-exam-az-204-topic-3-question-26-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79429-exam-az-204-topic-3-question-27-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79154-exam-az-204-topic-3-question-28-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79375-exam-az-204-topic-3-question-29-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79433-exam-az-204-topic-3-question-30-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79435-exam-az-204-topic-3-question-31-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/82038-exam-az-204-topic-3-question-32-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94493-exam-az-204-topic-3-question-33-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94727-exam-az-204-topic-3-question-34-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94589-exam-az-204-topic-3-question-35-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94432-exam-az-204-topic-3-question-36-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94594-exam-az-204-topic-3-question-37-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94299-exam-az-204-topic-3-question-38-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106561-exam-az-204-topic-3-question-39-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106572-exam-az-204-topic-3-question-40-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106564-exam-az-204-topic-3-question-41-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114548-exam-az-204-topic-3-question-42-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114267-exam-az-204-topic-3-question-43-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114418-exam-az-204-topic-3-question-44-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114647-exam-az-204-topic-3-question-45-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116813-exam-az-204-topic-3-question-47-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116610-exam-az-204-topic-3-question-48-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125276-exam-az-204-topic-3-question-49-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/131298-exam-az-204-topic-3-question-51-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130467-exam-az-204-topic-3-question-52-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130460-exam-az-204-topic-3-question-53-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/40700-exam-az-204-topic-4-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/40700-exam-az-204-topic-4-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/45841-exam-az-204-topic-4-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/45926-exam-az-204-topic-4-question-3-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/39338-exam-az-204-topic-4-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47219-exam-az-204-topic-4-question-5-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/43969-exam-az-204-topic-4-question-6-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47636-exam-az-204-topic-4-question-7-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46479-exam-az-204-topic-4-question-8-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/45744-exam-az-204-topic-4-question-9-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/44406-exam-az-204-topic-4-question-10-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/44094-exam-az-204-topic-4-question-11-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48866-exam-az-204-topic-4-question-12-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/49817-exam-az-204-topic-4-question-13-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48073-exam-az-204-topic-4-question-14-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/39140-exam-az-204-topic-4-question-15-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/29027-exam-az-204-topic-4-question-16-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/29028-exam-az-204-topic-4-question-17-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/49422-exam-az-204-topic-4-question-18-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46868-exam-az-204-topic-19-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/29029-exam-az-204-topic-4-question-20-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36129-exam-az-204-topic-4-question-21-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37714-exam-az-204-topic-4-question-22-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/39771-exam-az-204-topic-4-question-23-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36011-exam-az-204-topic-4-question-24-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37924-exam-az-204-topic-4-question-25-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36174-exam-az-204-topic-4-question-26-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53975-exam-az-204-topic-4-question-27-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53977-exam-az-204-topic-4-question-28-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53978-exam-az-204-topic-4-question-29-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56458-exam-az-204-topic-4-question-30-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56457-exam-az-204-topic-4-question-31-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56299-exam-az-204-topic-4-question-32-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56477-exam-az-204-topic-4-question-33-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56335-exam-az-204-topic-4-question-34-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56503-exam-az-204-topic-4-question-35-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74840-exam-az-204-topic-4-question-36-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74841-exam-az-204-topic-4-question-37-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74842-exam-az-204-topic-4-question-38-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36955-exam-az-204-topic-4-question-39-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/31132-exam-az-204-topic-4-question-40-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74663-exam-az-204-topic-4-question-41-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74843-exam-az-204-topic-4-question-42-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74844-exam-az-204-topic-4-question-43-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74846-exam-az-204-topic-4-question-44-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74816-exam-az-204-topic-4-question-45-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79724-exam-az-204-topic-4-question-46-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/81239-exam-az-204-topic-4-question-47-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79890-exam-az-204-topic-4-question-48-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/81251-exam-az-204-topic-4-question-49-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/81444-exam-az-204-topic-4-question-50-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/81614-exam-az-204-topic-4-question-51-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79004-exam-az-204-topic-4-question-52-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95339-exam-az-204-topic-4-question-53-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94649-exam-az-204-topic-4-question-54-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95341-exam-az-204-topic-4-question-55-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94767-exam-az-204-topic-4-question-57-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95342-exam-az-204-topic-4-question-56-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/96841-exam-az-204-topic-4-question-58-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94910-exam-az-204-topic-4-question-59-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95359-exam-az-204-topic-4-question-60-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95360-exam-az-204-topic-4-question-61-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95361-exam-az-204-topic-4-question-62-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106719-exam-az-204-topic-4-question-63-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114422-exam-az-204-topic-4-question-64-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/115192-exam-az-204-topic-4-question-65-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116861-exam-az-204-topic-4-question-66-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/126104-exam-az-204-topic-4-question-67-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/131870-exam-az-204-topic-4-question-68-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130443-exam-az-204-topic-4-question-73-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130443-exam-az-204-topic-4-question-73-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36142-exam-az-204-topic-5-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/38197-exam-az-204-topic-5-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/34553-exam-az-204-topic-5-question-3-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46665-exam-az-204-topic-5-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46672-exam-az-204-topic-5-question-5-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46904-exam-az-204-topic-5-question-6-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/44188-exam-az-204-topic-5-question-7-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/44385-exam-az-204-topic-5-question-8-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47176-exam-az-204-topic-5-question-9-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47266-exam-az-204-topic-5-question-10-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/38366-exam-az-204-topic-5-question-11-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36029-exam-az-204-topic-5-question-12-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37376-exam-az-204-topic-5-question-13-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36628-exam-az-204-topic-5-question-14-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53838-exam-az-204-topic-5-question-15-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53981-exam-az-204-topic-5-question-16-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/53841-exam-az-204-topic-5-question-17-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/54367-exam-az-204-topic-5-question-18-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56514-exam-az-204-topic-5-question-19-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/81218-exam-az-204-topic-5-question-20-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74849-exam-az-204-topic-5-question-21-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/32881-exam-az-204-topic-5-question-22-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36226-exam-az-204-topic-5-question-23-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37974-exam-az-204-topic-5-question-24-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74850-exam-az-204-topic-5-question-25-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74851-exam-az-204-topic-5-question-26-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79766-exam-az-204-topic-5-question-27-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/81223-exam-az-204-topic-5-question-28-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/82556-exam-az-204-topic-5-question-29-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/82290-exam-az-204-topic-5-question-30-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79214-exam-az-204-topic-5-question-31-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/80372-exam-az-204-topic-5-question-32-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/96268-exam-az-204-topic-5-question-33-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94919-exam-az-204-topic-5-question-34-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94821-exam-az-204-topic-5-question-35-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94885-exam-az-204-topic-5-question-36-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94822-exam-az-204-topic-5-question-37-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106739-exam-az-204-topic-5-question-38-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106858-exam-az-204-topic-5-question-39-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106742-exam-az-204-topic-5-question-40-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114611-exam-az-204-topic-5-question-41-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114664-exam-az-204-topic-5-question-42-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/117571-exam-az-204-topic-5-question-44-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125256-exam-az-204-topic-5-question-45-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/25200-exam-az-204-topic-6-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/22503-exam-az-204-topic-6-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47695-exam-az-204-topic-6-question-4-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/36574-exam-az-204-topic-6-question-5-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48891-exam-az-204-topic-6-question-6-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48036-exam-az-204-topic-6-question-7-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/46813-exam-az-204-topic-6-question-8-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48678-exam-az-204-topic-6-question-9-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/43937-exam-az-204-topic-6-question-10-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/47107-exam-az-204-topic-6-question-11-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/52908-exam-az-204-topic-6-question-12-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37769-exam-az-204-topic-6-question-13-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/22444-exam-az-204-topic-6-question-14-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/29327-exam-az-204-topic-6-question-15-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/22275-exam-az-204-topic-6-question-16-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/20228-exam-az-204-topic-6-question-17-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/48912-exam-az-204-topic-6-question-18-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/54095-exam-az-204-topic-6-question-19-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/54039-exam-az-204-topic-6-question-20-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/56653-exam-az-204-topic-6-question-21-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74481-exam-az-204-topic-6-question-22-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74650-exam-az-204-topic-6-question-23-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74653-exam-az-204-topic-6-question-24-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74858-exam-az-204-topic-6-question-25-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/35761-exam-az-204-topic-6-question-26-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/35883-exam-az-204-topic-6-question-27-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/37509-exam-az-204-topic-6-question-28-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/25308-exam-az-204-topic-6-question-29-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/80395-exam-az-204-topic-6-question-30-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79095-exam-az-204-topic-6-question-31-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79097-exam-az-204-topic-6-question-32-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/78950-exam-az-204-topic-6-question-33-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/78951-exam-az-204-topic-6-question-34-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/79100-exam-az-204-topic-6-question-35-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/97731-exam-az-204-topic-6-question-36-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/94604-exam-az-204-topic-6-question-37-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/95492-exam-az-204-topic-6-question-38-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106746-exam-az-204-topic-6-question-39-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/107182-exam-az-204-topic-6-question-40-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106550-exam-az-204-topic-6-question-41-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/106747-exam-az-204-topic-6-question-42-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114654-exam-az-204-topic-6-question-43-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114631-exam-az-204-topic-6-question-44-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114656-exam-az-204-topic-6-question-45-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/114657-exam-az-204-topic-6-question-46-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/118594-exam-az-204-topic-6-question-47-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116700-exam-az-204-topic-6-question-48-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116702-exam-az-204-topic-6-question-50-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116703-exam-az-204-topic-6-question-51-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/116742-exam-az-204-topic-6-question-52-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125762-exam-az-204-topic-6-question-53-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/125257-exam-az-204-topic-6-question-54-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/127312-exam-az-204-topic-6-question-55-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130481-exam-az-204-topic-6-question-56-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130537-exam-az-204-topic-6-question-57-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130870-exam-az-204-topic-6-question-58-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130468-exam-az-204-topic-6-question-60-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130872-exam-az-204-topic-6-question-61-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130435-exam-az-204-topic-2-question-63-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130451-exam-az-204-topic-4-question-69-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130852-exam-az-204-topic-4-question-70-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130799-exam-az-204-topic-4-question-71-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130827-exam-az-204-topic-4-question-72-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130445-exam-az-204-topic-5-question-46-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/130513-exam-az-204-topic-5-question-47-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74762-exam-az-204-topic-7-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/74859-exam-az-204-topic-7-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/75073-exam-az-204-topic-12-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/27025-exam-az-204-topic-12-question-2-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/75202-exam-az-204-topic-23-question-1-discussion/",
+
+"https://www.examtopics.com/discussions/microsoft/view/26871-exam-az-204-topic-23-question-2-discussion/"
+        ];
+
+        // Função para sortear uma string aleatória
+        function sortearString() {
+            const indiceAleatorio = Math.floor(Math.random() * strings.length);
+            const stringSorteada = strings[indiceAleatorio];
+            document.getElementById("resultado").textContent = '<a href='${stringSorteada}">questao sorteada</a>';
+        }
+
+        // Adiciona o evento de clique ao botão
+        document.getElementById("sortear").addEventListener("click", sortearString);
+    </script>
 </body>
 </html>

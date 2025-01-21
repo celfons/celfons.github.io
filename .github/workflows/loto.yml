@@ -45,14 +45,11 @@ jobs:
               // Conectar ao MongoDB Atlas
               const client = new MongoClient(process.env.MONGODB_URI);
               await client.connect();
-              const db = client.db("loterias"); // Nome do banco
+              const db = client.db("loteria"); // Nome do banco
               const collection = db.collection("lotofacil"); // Nome da coleção
 
               // Inserir os dados no MongoDB
-              await collection.insertOne({
-                data: lotofacilData,
-                fetchedAt: new Date() // Adiciona um timestamp
-              });
+              await collection.insertOne(lotofacilData);
               console.log("Dados da Lotofácil inseridos com sucesso!");
 
               await client.close();

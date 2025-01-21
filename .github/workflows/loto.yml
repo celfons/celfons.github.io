@@ -49,7 +49,7 @@ jobs:
               const collection = db.collection("lotofacil"); // Nome da coleção
 
               // Inserir os dados no MongoDB
-              await collection.insertOne(lotofacilData);
+              await collection.insertMany(lotofacilData);
               console.log("Dados da Lotofácil inseridos com sucesso!");
 
               await client.close();

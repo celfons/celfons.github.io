@@ -7,19 +7,25 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .bg-secondary-light {
-      background-color: #e8f5e9 !important; /* Verde claro para elementos secundários */
+      background-color: #f3e5f5 !important; /* Lilás claro para elementos secundários */
     }
     .text-secondary-light {
-      color: #4caf50 !important; /* Verde escuro para contraste */
+      color: #7b1fa2 !important; /* Lilás escuro para texto */
+    }
+    .text-white {
+      color: #ffffff !important; /* Branco */
     }
     footer {
-      background-color: #4caf50; /* Verde escuro */
+      background-color: #7b1fa2; /* Lilás escuro */
+    }
+    footer a {
+      color: #f3e5f5 !important; /* Lilás claro para links no rodapé */
     }
   </style>
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -44,7 +50,7 @@
   </section>
 
   <!-- Sobre a Campanha -->
-  <section id="sobre" class="py-5">
+  <section id="sobre" class="py-5 bg-white">
     <div class="container text-center">
       <h2 class="text-secondary-light mb-4">Por que participar?</h2>
       <p>A campanha promovida pela Dra. Thaís Moraes busca incentivar a sustentabilidade e dar o destino correto para itens odontológicos usados. Participe e faça a diferença para o meio ambiente!</p>
@@ -52,26 +58,26 @@
   </section>
 
   <!-- Como Participar -->
-  <section id="como-participar" class="bg-light py-5">
+  <section id="como-participar" class="bg-secondary-light py-5">
     <div class="container">
       <h2 class="text-center text-secondary-light mb-4">Como Participar</h2>
       <div class="row text-center">
         <div class="col-md-4">
           <div class="p-3">
-            <h4>1. Recolha</h4>
-            <p>Separe itens odontológicos usados, como escovas e tubos de creme dental.</p>
+            <h4 class="text-white">1. Recolha</h4>
+            <p class="text-white">Separe itens odontológicos usados, como escovas e tubos de creme dental.</p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="p-3">
-            <h4>2. Entregue</h4>
-            <p>Leve-os até o ponto de coleta: <strong>Av. Santos Dumont, 365, Uberaba.</strong></p>
+            <h4 class="text-white">2. Entregue</h4>
+            <p class="text-white">Leve-os até o ponto de coleta: <strong>Av. Santos Dumont, 365, Uberaba.</strong></p>
           </div>
         </div>
         <div class="col-md-4">
           <div class="p-3">
-            <h4>3. Concorra</h4>
-            <p>Cada item entregue gera um cupom para o sorteio de uma escova elétrica!</p>
+            <h4 class="text-white">3. Concorra</h4>
+            <p class="text-white">Cada item entregue gera um cupom para o sorteio de uma escova elétrica!</p>
           </div>
         </div>
       </div>
@@ -79,7 +85,7 @@
   </section>
 
   <!-- Regras da Campanha -->
-  <section id="regras" class="py-5">
+  <section id="regras" class="py-5 bg-white">
     <div class="container">
       <h2 class="text-center text-secondary-light mb-4">Regras da Campanha</h2>
       <ul class="list-group list-group-flush">
@@ -94,15 +100,15 @@
   <!-- Contato -->
   <section id="contato" class="bg-secondary-light text-secondary-light text-center py-5">
     <div class="container">
-      <h2 class="mb-4">Contato</h2>
-      <p>Siga-nos no Instagram: <a href="https://instagram.com/dra.thaismoraes" class="text-secondary-light">@dra.thaismoraes</a></p>
+      <h2 class="mb-4 text-white">Contato</h2>
+      <p class="text-white">Siga-nos no Instagram: <a href="https://instagram.com/dra.thaismoraes" class="text-white">@dra.thaismoraes</a></p>
     </div>
   </section>
 
   <!-- Rodapé -->
   <footer class="text-white text-center py-3">
     <div class="container">
-      <p>© 2025 Campanha Dra. Thaís Moraes. Todos os direitos reservados.</p>
+      <p>© 2025 Campanha Dra. Thaís Moraes Curacycle. Todos os direitos reservados.</p>
       <p>
         <a href="#termos" class="text-white text-decoration-none">Termos e Condições</a> | 
         <a href="#politica" class="text-white text-decoration-none">Política de Privacidade</a>

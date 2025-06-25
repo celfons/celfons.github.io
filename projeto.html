@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passaporte do Sorriso Saudável | Transforme a saúde bucal em diversão!</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #4d9de0;
+            --secondary: #ff9a8b;
+            --accent: #e15554;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, #3a7bc8 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(120deg, rgba(77, 157, 224, 0.1) 0%, rgba(255, 154, 139, 0.1) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23ffffff"/><path d="M20,20 Q40,5 60,20 T100,20 Q85,40 100,60 T100,100 Q60,85 60,100 T20,100 Q5,85 20,60 T20,20 Z" fill="%234d9de0" opacity="0.1"/></svg>');
+            background-size: cover;
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-weight: 800;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .btn-cta {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 154, 139, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 154, 139, 0.6);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 2px;
+        }
+        
+        .feature-card {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .how-it-works {
+            background: linear-gradient(135deg, rgba(77, 157, 224, 0.05) 0%, rgba(255, 154, 139, 0.05) 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            height: 100%;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .package-card {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .package-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .package-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #3a7bc8 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .package-popular .package-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .package-feature {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .testimonial-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid white;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .faq-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .faq-header {
+            background: var(--light);
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .faq-body {
+            padding: 20px;
+            background: white;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #3a7bc8 100%);
+            padding: 80px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .sticker-showcase {
+            position: relative;
+            height: 300px;
+        }
+        
+        .sticker {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .sticker:nth-child(1) {
+            background: #ffd166;
+            top: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .sticker:nth-child(2) {
+            background: #06d6a0;
+            top: 40px;
+            left: 40%;
+            animation-delay: 1s;
+        }
+        
+        .sticker:nth-child(3) {
+            background: #118ab2;
+            top: 100px;
+            left: 70%;
+            animation-delay: 2s;
+        }
+        
+        .sticker:nth-child(4) {
+            background: #ef476f;
+            top: 180px;
+            left: 20%;
+            animation-delay: 3s;
+        }
+        
+        .sticker:nth-child(5) {
+            background: #7209b7;
+            top: 200px;
+            left: 60%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .album-showcase {
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .album-img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .album-img:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-passport me-2"></i>
+                <span class="fw-bold">Passaporte do Sorriso</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#como-funciona">Como Funciona</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pacotes">Pacotes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#beneficios">Benefícios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">Perguntas</a></li>
+                </ul>
+                <a href="#pacotes" class="btn btn-light btn-sm ms-lg-3">Comprar Agora</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">Transforme a saúde bucal do seu filho em uma aventura divertida!</h1>
+                    <p class="hero-subtitle">Com o Passaporte do Sorriso Saudável, cada escovação, uso de fio dental e visita ao dentista se transforma em uma missão recompensadora!</p>
+                    <a href="#pacotes" class="btn btn-light btn-lg btn-cta">Quero o Passaporte Agora!</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="album-showcase text-center mt-5 mt-lg-0">
+                        <div class="sticker-showcase position-relative">
+                            <div class="sticker"><i class="bi bi-star-fill"></i></div>
+                            <div class="sticker"><i class="bi bi-heart-fill"></i></div>
+                            <div class="sticker"><i class="bi bi-lightning-fill"></i></div>
+                            <div class="sticker"><i class="bi bi-award-fill"></i></div>
+                            <div class="sticker"><i class="bi bi-trophy-fill"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Por que o Passaporte do Sorriso?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-emoji-smile"></i>
+                        </div>
+                        <h3>Transforma Rotina em Diversão</h3>
+                        <p>Transforme tarefas diárias como escovação em missões emocionantes que as crianças amam completar.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-stickies"></i>
+                        </div>
+                        <h3>Sistema de Recompensas</h3>
+                        <p>Colecione adesivos e troque por prêmios reais que motivam a continuar com os bons hábitos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Desenvolvido com Especialistas</h3>
+                        <p>Conteúdo validado por dentistas pediátricos para garantir a eficácia das técnicas ensinadas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="como-funciona" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Como Funciona</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Complete Missões Diárias</h3>
+                        <p>Escovação, uso do fio dental e outras atividades viram missões divertidas.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Colete Seus Adesivos</h3>
+                        <p>A cada missão cumprida, ganhe adesivos especiais para colar no álbum.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Troque por Recompensas</h3>
+                        <p>Acumule adesivos e troque por brindes digitais, descontos e prêmios especiais!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="pacotes" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Escolha Seu Pacote</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <div class="package-header">
+                            <h3>Básico</h3>
+                            <p>Para começar a jornada</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="price">R$ 49</div>
+                            <ul class="list-unstyled">
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Álbum de figurinhas (32 páginas)</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> 50 adesivos temáticos</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Acesso ao Clubinho Digital</li>
+                                <li class="package-feature"><i class="bi bi-x-circle-fill text-secondary me-2"></i> Medalha física</li>
+                                <li class="package-feature"><i class="bi bi-x-circle-fill text-secondary me-2"></i> Adesivos lendários</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Comprar Agora</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card package-popular">
+                        <div class="package-header">
+                            <h3>Premium</h3>
+                            <p>O mais escolhido</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="price">R$ 97</div>
+                            <ul class="list-unstyled">
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Álbum de figurinhas premium</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> 150 adesivos temáticos</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Acesso completo ao Clubinho</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Medalha física "Guardião"</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> 1 adesivo lendário exclusivo</li>
+                            </ul>
+                            <a href="#" class="btn btn-cta w-100 mt-3">Comprar Agora</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="package-card">
+                        <div class="package-header">
+                            <h3>Assinatura</h3>
+                            <p>Aventura contínua</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="price">R$ 27<span class="fs-6">/mês</span></div>
+                            <ul class="list-unstyled">
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Álbum de figurinhas</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> 30 novos adesivos por mês</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Acesso VIP ao Clubinho</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Medalha física inicial</li>
+                                <li class="package-feature"><i class="bi bi-check-circle-fill text-success me-2"></i> Adesivo lendário mensal</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Assinar Agora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="depoimentos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">O que os pais dizem</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center">
+                        <div class="testimonial-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Ana, mãe do Pedro (6 anos)</h4>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="fst-italic">"Antes era uma luta para escovar os dentes. Agora meu filho pede para escovar para ganhar adesivos. Mudou completamente nossa rotina!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center">
+                        <div class="testimonial-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Carlos, pai da Sofia (5 anos)</h4>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="fst-italic">"A Sofia nunca usava fio dental. Depois que virou uma 'missão' no Passaporte, ela mesma pede para usar. Incrível como funciona!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center">
+                        <div class="testimonial-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <h4>Juliana, mãe da Laura (7 anos)</h4>
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="fst-italic">"A visita ao dentista era um pesadelo. Depois do Passaporte, ela vê como uma chance de ganhar o adesivo especial. Recomendo demais!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Para qual idade é recomendado o Passaporte do Sorriso?
+                        </div>
+                        <div id="faq1" class="collapse show">
+                            <div class="faq-body">
+                                O Passaporte do Sorriso é perfeito para crianças de 3 a 10 anos. Temos diferentes níveis de desafios que se adaptam às diferentes faixas etárias.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Como funciona o sistema de recompensas?
+                        </div>
+                        <div id="faq2" class="collapse">
+                            <div class="faq-body">
+                                Cada hábito saudável conquistado vale um adesivo. Ao completar coleções específicas, as crianças podem trocá-las por recompensas digitais (como e-books para colorir), descontos em produtos de higiene bucal ou até mesmo prêmios físicos como medalhas e certificados.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Posso acompanhar o progresso do meu filho?
+                        </div>
+                        <div id="faq3" class="collapse">
+                            <div class="faq-body">
+                                Sim! Com o acesso ao Clubinho Digital (incluído em todos os pacotes), você pode acompanhar todas as conquistas e coleções completadas pelo seu filho através de um painel online.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-card">
+                        <div class="faq-header" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Quanto tempo dura o álbum?
+                        </div>
+                        <div id="faq4" class="collapse">
+                            <div class="faq-body">
+                                O álbum físico tem espaço para 6 meses de atividades diárias. Para uma experiência contínua, oferecemos pacotes de expansão e nossa assinatura mensal que envia novos conjuntos de adesivos temáticos mensalmente.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Transforme a saúde bucal do seu filho hoje mesmo!</h2>
+            <p class="lead mb-4">Junte-se a mais de 2.000 famílias que já transformaram a rotina de higiene bucal em diversão.</p>
+            <a href="#pacotes" class="btn btn-light btn-lg btn-cta">Quero o Passaporte Agora!</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="mb-4"><i class="bi bi-passport me-2"></i> Passaporte do Sorriso</h4>
+                    <p>Transformando hábitos de saúde bucal em aventuras divertidas para crianças.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-4">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#como-funciona" class="text-white text-decoration-none">Como Funciona</a></li>
+                        <li class="mb-2"><a href="#pacotes" class="text-white text-decoration-none">Pacotes</a></li>
+                        <li class="mb-2"><a href="#beneficios" class="text-white text-decoration-none">Benefícios</a></li>
+                        <li class="mb-2"><a href="#faq" class="text-white text-decoration-none">Perguntas Frequentes</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Contato</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> contato@passaportesorridente.com</li>
+                        <li class="mb-2"><i class="bi bi-whatsapp me-2"></i> (11) 98765-4321</li>
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> São Paulo, SP</li>
+                    </ul>
+                    <div class="mt-4">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMzUiPjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMzUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" alt="Payment methods" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p>&copy; 2023 Passaporte do Sorriso. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Ativar tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        
+        // Scroll suave para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

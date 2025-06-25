@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jornada do Sorriso Saudável - Álbum Interativo</title>
+    <title>Jornada do Sorriso Saudável - Álbum Completo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,15 +11,15 @@
             --color-primary: #4d9de0;
             --color-secondary: #ff9a8b;
             --color-accent: #e15554;
+            --color-success: #28a745;
+            --color-warning: #ffc107;
             --color-light: #f8f9fa;
             --color-dark: #343a40;
-            --color-success: #28a745;
         }
         
         body {
             background: linear-gradient(135deg, #e0f7fa 0%, #f8bbd0 100%);
             font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
-            min-height: 100vh;
             padding: 20px;
         }
         
@@ -31,7 +31,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             overflow: hidden;
             border: 15px solid #ffd166;
-            position: relative;
         }
         
         .album-header {
@@ -39,84 +38,120 @@
             color: white;
             padding: 20px;
             text-align: center;
-            position: relative;
         }
         
-        .progress-section {
-            background: #e9f5ff;
-            padding: 15px;
-            text-align: center;
-            border-bottom: 3px dashed var(--color-primary);
-        }
-        
-        .realm-card {
-            border: 3px solid #4d9de0;
-            border-radius: 15px;
-            margin: 20px;
+        .album-pages {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
             padding: 20px;
+        }
+        
+        .album-page {
             position: relative;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            border: 3px solid var(--color-primary);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 500px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         
-        .realm-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .realm-1 { background: linear-gradient(to bottom, #e8f5e9, #ffffff); }
-        .realm-2 { background: linear-gradient(to bottom, #fff3e0, #ffffff); }
-        .realm-3 { background: linear-gradient(to bottom, #e3f2fd, #ffffff); }
-        .realm-4 { background: linear-gradient(to bottom, #f3e5f5, #ffffff); }
-        
-        .realm-title {
+        .page-title {
             background: var(--color-primary);
             color: white;
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 30px;
-            margin-top: -40px;
-            margin-bottom: 15px;
+            padding: 8px 25px;
+            border-radius: 0 0 20px 0;
             font-weight: bold;
+            font-size: 1.5rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
         }
         
-        .sticker-grid {
+        .page-subtitle {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 10px 0 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px;
+            border-radius: 10px;
+        }
+        
+        .page-content {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            margin-top: 50px;
+            height: calc(100% - 100px);
+        }
+        
+        .journey-path {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
             margin: 20px 0;
+            position: relative;
+        }
+        
+        .path-line {
+            position: absolute;
+            height: 3px;
+            background: var(--color-primary);
+            top: 50px;
+            left: 30px;
+            right: 30px;
+            z-index: 0;
         }
         
         .sticker-slot {
-            width: 80px;
-            height: 80px;
-            border: 2px dashed #ccc;
-            border-radius: 15px;
+            position: relative;
+            z-index: 1;
+            width: 100px;
+            height: 100px;
+            border: 3px dashed #ccc;
+            border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.7);
-            position: relative;
+            background: rgba(255, 255, 255, 0.9);
             transition: all 0.3s ease;
             cursor: pointer;
         }
         
         .sticker-slot:hover {
             transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.9);
         }
         
         .sticker-placeholder {
-            font-size: 24px;
-            color: #ddd;
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        
+        .sticker-name {
+            font-size: 0.8rem;
+            text-align: center;
+            max-width: 90px;
         }
         
         .sticker-collected {
             border: 3px solid var(--color-success);
             background: #e8f5e9;
             animation: pulse 1.5s infinite;
+        }
+        
+        .page-description {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(77, 157, 224, 0.1);
         }
         
         .mission-card {
@@ -128,32 +163,24 @@
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
         
-        .medal-display {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-            border-top: 2px dashed var(--color-primary);
+        .realm-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--color-secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 0 15px 0 15px;
+            font-weight: bold;
         }
         
-        .medal {
-            font-size: 50px;
-            display: inline-block;
-            margin: 0 15px;
-            filter: grayscale(100%);
-            transition: all 0.5s ease;
-        }
+        .page-1 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500"><rect width="1000" height="500" fill="%23e8f5e9"/><path d="M100,400 Q250,300 400,400 Q550,350 700,400 L700,500 L100,500 Z" fill="%23c8e6c9"/><circle cx="200" cy="100" r="40" fill="%2381c784"/><circle cx="350" cy="150" r="60" fill="%234caf50"/><circle cx="500" cy="80" r="50" fill="%2381c784"/><circle cx="700" cy="120" r="70" fill="%234caf50"/><path d="M150,300 Q200,250 250,300" stroke="%234d9de0" stroke-width="5" fill="none"/><path d="M400,350 Q450,300 500,350" stroke="%234d9de0" stroke-width="5" fill="none"/><path d="M650,320 Q700,270 750,320" stroke="%234d9de0" stroke-width="5" fill="none"/></svg>'); }
         
-        .medal-earned {
-            filter: grayscale(0%);
-            animation: spin 1s ease;
-        }
+        .page-2 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500"><rect width="1000" height="500" fill="%23fff3e0"/><path d="M100,400 L200,250 L300,350 L400,200 L500,300 L600,150 L700,250 L800,100 L900,200 L900,500 L100,500 Z" fill="%23ffe0b2"/><path d="M200,250 L300,200 L400,300" stroke="%23ff9800" stroke-width="8" fill="none"/><path d="M500,300 L600,250 L700,350" stroke="%23ff9800" stroke-width="8" fill="none"/></svg>'); }
         
-        .realm-path {
-            border-left: 3px dotted var(--color-primary);
-            height: 50px;
-            margin: 0 auto;
-            width: 0;
-        }
+        .page-3 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500"><rect width="1000" height="500" fill="%23e3f2fd"/><path d="M0,400 Q250,300 500,400 Q750,350 1000,400 L1000,500 L0,500 Z" fill="%2390caf9"/><path d="M200,200 Q300,150 400,200" stroke="%232196f3" stroke-width="5" fill="none"/><circle cx="300" cy="300" r="40" fill="%232196f3" opacity="0.6"/><circle cx="600" cy="250" r="60" fill="%232196f3" opacity="0.6"/><circle cx="800" cy="350" r="50" fill="%232196f3" opacity="0.6"/></svg>'); }
+        
+        .page-4 { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500"><rect width="1000" height="500" fill="%23f3e5f5"/><rect x="200" y="200" width="100" height="200" fill="%23ce93d8"/><rect x="400" y="150" width="120" height="250" fill="%23ba68c8"/><rect x="600" y="100" width="150" height="300" fill="%23ab47bc"/><circle cx="250" cy="180" r="20" fill="%239c27b0"/><circle cx="450" cy="130" r="25" fill="%239c27b0"/><circle cx="670" cy="80" r="30" fill="%239c27b0"/><path d="M100,400 Q250,350 400,400 Q550,380 700,400 Q850,420 1000,400 L1000,500 L0,500 Z" fill="%23e1bee7"/></svg>'); }
         
         .album-footer {
             background: var(--color-primary);
@@ -163,245 +190,369 @@
             font-weight: bold;
         }
         
-        .achievement-badge {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 50px;
-            height: 50px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 10;
-        }
-        
-        .level-indicator {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: var(--color-secondary);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
             100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
         }
         
-        @keyframes spin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
         
-        .realm-description {
-            min-height: 80px;
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(77, 157, 224, 0.1);
+        .nav-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: var(--color-accent);
+            transform: scale(1.1);
+        }
+        
+        .page-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+        }
+        
+        .page-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+        }
+        
+        .page-dot.active {
+            background: var(--color-primary);
+            transform: scale(1.3);
         }
     </style>
 </head>
 <body>
     <div class="album-container">
-        <!-- Cabeçalho do Álbum -->
         <div class="album-header">
             <h1><i class="fas fa-tooth"></i> Jornada do Sorriso Saudável</h1>
-            <p>Transforme hábitos bucais em uma aventura épica!</p>
+            <p>Colecione todos os selos e torne-se um Guardião do Sorriso!</p>
         </div>
         
-        <!-- Barra de Progresso -->
-        <div class="progress-section">
-            <h4>Sua Jornada: <span class="badge bg-success">Floresta dos Dentes de Leite</span></h4>
-            <div class="progress mt-3" style="height: 25px;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" 
-                     role="progressbar" 
-                     style="width: 30%;" 
-                     aria-valuenow="30" 
-                     aria-valuemin="0" 
-                     aria-valuemax="100">30% Completo</div>
-            </div>
-        </div>
-        
-        <!-- Mapa da Jornada -->
-        <div class="text-center p-3" style="background: #e9f5ff;">
-            <h4>Mapa da Jornada</h4>
-            <div class="d-flex justify-content-around align-items-center">
-                <div class="realm-point active">
-                    <i class="fas fa-tree fa-2x" style="color: #4caf50;"></i>
-                    <div>Floresta</div>
-                </div>
-                <i class="fas fa-arrow-right fa-2x text-muted"></i>
-                <div class="realm-point">
-                    <i class="fas fa-mountain fa-2x" style="color: #ff9800;"></i>
-                    <div>Montanhas</div>
-                </div>
-                <i class="fas fa-arrow-right fa-2x text-muted"></i>
-                <div class="realm-point">
-                    <i class="fas fa-water fa-2x" style="color: #2196f3;"></i>
-                    <div>Oceano</div>
-                </div>
-                <i class="fas fa-arrow-right fa-2x text-muted"></i>
-                <div class="realm-point">
-                    <i class="fas fa-city fa-2x" style="color: #9c27b0;"></i>
-                    <div>Cidade</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Reino 1: Floresta dos Dentes de Leite -->
-        <div class="realm-card realm-1">
-            <div class="level-indicator">Iniciante</div>
-            <div class="realm-title">Reino 1: Floresta dos Dentes de Leite</div>
-            <div class="achievement-badge"><i class="fas fa-seedling"></i></div>
-            
-            <div class="realm-description">
-                <p>Bem-vindo à Floresta Encantada! Aqui você aprenderá os primeiros passos para se tornar um Guardião do Sorriso. Complete as missões para avançar!</p>
-            </div>
-            
-            <div class="mission-card">
-                <h5><i class="fas fa-tasks"></i> Missões:</h5>
-                <div class="sticker-grid">
-                    <div class="sticker-slot sticker-collected">
-                        <div class="sticker-placeholder">🌞</div>
-                        <div class="sticker-name">Herói Matinal</div>
+        <div class="album-pages">
+            <!-- Página 1: Floresta dos Dentes de Leite -->
+            <div class="album-page page-1">
+                <div class="page-title">Reino 1: Floresta dos Dentes de Leite</div>
+                <div class="realm-indicator">Iniciante</div>
+                
+                <div class="page-content">
+                    <div class="page-subtitle">A aventura começa na floresta encantada!</div>
+                    
+                    <div class="page-description">
+                        <p>Bem-vindo à Floresta dos Dentes de Leite! Aqui você aprenderá os hábitos essenciais para proteger seu sorriso. Complete as missões e colete os selos para avançar na jornada!</p>
                     </div>
-                    <div class="sticker-slot sticker-collected">
-                        <div class="sticker-placeholder">🌙</div>
-                        <div class="sticker-name">Guardião Noturno</div>
+                    
+                    <div class="journey-path">
+                        <div class="path-line"></div>
+                        
+                        <!-- Selos da Floresta -->
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🌱</div>
+                            <div class="sticker-name">Semente da Escovação</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">💧</div>
+                            <div class="sticker-name">Guardião do Flúor</div>
+                        </div>
+                        <div class="sticker-slot sticker-collected">
+                            <div class="sticker-placeholder">🌞</div>
+                            <div class="sticker-name">Herói Matinal</div>
+                        </div>
+                        <div class="sticker-slot sticker-collected">
+                            <div class="sticker-placeholder">🌙</div>
+                            <div class="sticker-name">Guardião Noturno</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">✨</div>
+                            <div class="sticker-name">Fio Encantado</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🍎</div>
+                            <div class="sticker-name">Protetor do pH</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🦷</div>
+                            <div class="sticker-name">Explorador do Trono</div>
+                        </div>
                     </div>
-                    <div class="sticker-slot">
-                        <div class="sticker-placeholder">✨</div>
-                        <div class="sticker-name">Fio Encantado</div>
-                    </div>
-                    <div class="sticker-slot">
-                        <div class="sticker-placeholder">🦷</div>
-                        <div class="sticker-name">Explorador do Trono</div>
-                    </div>
-                    <div class="sticker-slot">
-                        <div class="sticker-placeholder">🍎</div>
-                        <div class="sticker-name">Protetor do pH</div>
+                    
+                    <div class="mission-card">
+                        <h5><i class="fas fa-tasks"></i> Missões da Floresta:</h5>
+                        <ul>
+                            <li>Realizar a primeira escovação (Herói Matinal)</li>
+                            <li>Escovar os dentes antes de dormir (Guardião Noturno)</li>
+                            <li>Usar fio dental pela primeira vez (Fio Encantado)</li>
+                            <li>Escolher uma fruta em vez de doce (Protetor do pH)</li>
+                        </ul>
                     </div>
                 </div>
             </div>
             
-            <div class="medal-display">
-                <h5><i class="fas fa-medal"></i> Conquistas:</h5>
-                <div>
-                    <div class="medal">🥉</div>
-                    <div class="medal text-muted">🥈</div>
-                    <div class="medal text-muted">🥇</div>
+            <!-- Página 2: Montanhas do Esmalte -->
+            <div class="album-page page-2">
+                <div class="page-title">Reino 2: Montanhas do Esmalte</div>
+                <div class="realm-indicator">Intermediário</div>
+                
+                <div class="page-content">
+                    <div class="page-subtitle">Escalando novas técnicas de proteção!</div>
+                    
+                    <div class="page-description">
+                        <p>Desafie-se nas altas Montanhas do Esmalte! Aqui você dominará técnicas avançadas para fortalecer seu sorriso. Cada selo é um passo mais alto na montanha!</p>
+                    </div>
+                    
+                    <div class="journey-path">
+                        <div class="path-line"></div>
+                        
+                        <!-- Selos das Montanhas -->
+                        <div class="sticker-slot sticker-collected">
+                            <div class="sticker-placeholder">⛰️</div>
+                            <div class="sticker-name">Escalador Circular</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">👅</div>
+                            <div class="sticker-name">Guardião da Língua</div>
+                        </div>
+                        <div class="sticker-slot sticker-collected">
+                            <div class="sticker-placeholder">⏱️</div>
+                            <div class="sticker-name">Observador do Relógio</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🧵</div>
+                            <div class="sticker-name">Navegador Interdental</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🔄</div>
+                            <div class="sticker-name">Mestre da Troca</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🏠</div>
+                            <div class="sticker-name">Guardião do Armazenamento</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🛡️</div>
+                            <div class="sticker-name">Defensor do Flúor</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h5><i class="fas fa-tasks"></i> Missões das Montanhas:</h5>
+                        <ul>
+                            <li>Escovar usando movimentos circulares (Escalador Circular)</li>
+                            <li>Escovar por 2 minutos completos (Observador do Relógio)</li>
+                            <li>Limpar a língua após escovar (Guardião da Língua)</li>
+                            <li>Usar fio dental corretamente (Navegador Interdental)</li>
+                        </ul>
+                    </div>
                 </div>
-                <p>Colete 5 selos para ganhar a Medalha de Bronze!</p>
-            </div>
-        </div>
-        
-        <div class="realm-path"></div>
-        
-        <!-- Reino 2: Montanhas do Esmalte -->
-        <div class="realm-card realm-2">
-            <div class="level-indicator">Intermediário</div>
-            <div class="realm-title text-muted">Reino 2: Montanhas do Esmalte</div>
-            <div class="achievement-badge text-muted"><i class="fas fa-mountain"></i></div>
-            
-            <div class="realm-description">
-                <p>Desafie-se nas altas Montanhas do Esmalte! Este reino está bloqueado até que você complete a Floresta dos Dentes de Leite.</p>
             </div>
             
-            <div class="text-center p-4">
-                <h5><i class="fas fa-lock"></i> Complete o Reino 1 para desbloquear!</h5>
-                <p>Domine as técnicas básicas para acessar este novo desafio</p>
-                <div class="sticker-grid">
-                    <div class="sticker-slot text-muted">
-                        <div class="sticker-placeholder">⛰️</div>
+            <!-- Página 3: Oceano Gengival -->
+            <div class="album-page page-3">
+                <div class="page-title">Reino 3: Oceano Gengival</div>
+                <div class="realm-indicator">Avançado</div>
+                
+                <div class="page-content">
+                    <div class="page-subtitle">Mergulhe nas profundezas da saúde bucal!</div>
+                    
+                    <div class="page-description">
+                        <p>Bem-vindo ao misterioso Oceano Gengival! Aqui você enfrentará desafios mais complexos para proteger seu sorriso das ameaças submarinas. Cada selo é um tesouro a ser descoberto!</p>
                     </div>
-                    <div class="sticker-slot text-muted">
-                        <div class="sticker-placeholder">🧊</div>
+                    
+                    <div class="journey-path">
+                        <div class="path-line"></div>
+                        
+                        <!-- Selos do Oceano -->
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🌊</div>
+                            <div class="sticker-name">Nadador Noturno</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">👑</div>
+                            <div class="sticker-name">Explorador do Trono</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">❤️</div>
+                            <div class="sticker-name">Protetor das Gengivas</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🚫🍬</div>
+                            <div class="sticker-name">Caçador de Açúcar</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">💎</div>
+                            <div class="sticker-name">Defensor do Esmalte</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🎒</div>
+                            <div class="sticker-name">Mestre do Kit</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">👫</div>
+                            <div class="sticker-name">Guardião do Sorriso</div>
+                        </div>
                     </div>
-                    <div class="sticker-slot text-muted">
-                        <div class="sticker-placeholder">🔍</div>
+                    
+                    <div class="mission-card">
+                        <h5><i class="fas fa-tasks"></i> Missões do Oceano:</h5>
+                        <ul>
+                            <li>Visita ao dentista sem medo (Explorador do Trono)</li>
+                            <li>Massagem gengival suave (Protetor das Gengivas)</li>
+                            <li>Evitar doces entre refeições (Caçador de Açúcar)</li>
+                            <li>Usar canudo para bebidas ácidas (Defensor do Esmalte)</li>
+                        </ul>
                     </div>
-                    <div class="sticker-slot text-muted">
-                        <div class="sticker-placeholder">🛡️</div>
+                </div>
+            </div>
+            
+            <!-- Página 4: Cidade Reluzente -->
+            <div class="album-page page-4">
+                <div class="page-title">Reino 4: Cidade Reluzente</div>
+                <div class="realm-indicator">Expert</div>
+                
+                <div class="page-content">
+                    <div class="page-subtitle">Torne-se um Mestre do Sorriso!</div>
+                    
+                    <div class="page-description">
+                        <p>Bem-vindo à Cidade Reluzente, onde apenas os verdadeiros Guardiões do Sorriso chegam! Aqui você demonstrará todo seu conhecimento e se tornará um embaixador da saúde bucal.</p>
+                    </div>
+                    
+                    <div class="journey-path">
+                        <div class="path-line"></div>
+                        
+                        <!-- Selos da Cidade -->
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">📅</div>
+                            <div class="sticker-name">Herói da Rotina</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🧵✨</div>
+                            <div class="sticker-name">Embaixador do Fio</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🍏</div>
+                            <div class="sticker-name">Inventor de Lanches</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">👥</div>
+                            <div class="sticker-name">Líder da Escovação</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">📋</div>
+                            <div class="sticker-name">Mestre do Check-up</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">📣</div>
+                            <div class="sticker-name">Defensor do Sorriso</div>
+                        </div>
+                        <div class="sticker-slot">
+                            <div class="sticker-placeholder">🏆</div>
+                            <div class="sticker-name">Guardião Supremo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h5><i class="fas fa-tasks"></i> Missões da Cidade:</h5>
+                        <ul>
+                            <li>30 dias de hábitos perfeitos (Herói da Rotina)</li>
+                            <li>Ensinar técnica do fio dental (Embaixador do Fio)</li>
+                            <li>Criar um lanche saudável (Inventor de Lanches)</li>
+                            <li>Agendar próxima consulta (Mestre do Check-up)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <div class="badge bg-warning text-dark p-2">
+                            <i class="fas fa-crown"></i> Complete todos os selos para tornar-se um Guardião Supremo!
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="realm-path"></div>
-        
-        <!-- Reino 3: Oceano Gengival -->
-        <div class="realm-card realm-3">
-            <div class="level-indicator">Avançado</div>
-            <div class="realm-title text-muted">Reino 3: Oceano Gengival</div>
-            <div class="achievement-badge text-muted"><i class="fas fa-water"></i></div>
-            
-            <div class="realm-description">
-                <p>Mergulhe nas profundezas do Oceano Gengival! Este reino requer o domínio das Montanhas do Esmalte.</p>
+        <div class="page-navigation">
+            <button class="nav-btn prev-btn"><i class="fas fa-arrow-left"></i></button>
+            <div class="page-indicator">
+                <div class="page-dot active" data-page="1"></div>
+                <div class="page-dot" data-page="2"></div>
+                <div class="page-dot" data-page="3"></div>
+                <div class="page-dot" data-page="4"></div>
             </div>
-            
-            <div class="text-center p-4">
-                <h5><i class="fas fa-lock"></i> Complete o Reino 2 para desbloquear!</h5>
-                <p>Aprimore suas habilidades para explorar este reino submarino</p>
-            </div>
+            <button class="nav-btn next-btn"><i class="fas fa-arrow-right"></i></button>
         </div>
         
-        <div class="realm-path"></div>
-        
-        <!-- Reino 4: Cidade Reluzente -->
-        <div class="realm-card realm-4">
-            <div class="level-indicator">Expert</div>
-            <div class="realm-title text-muted">Reino 4: Cidade Reluzente</div>
-            <div class="achievement-badge text-muted"><i class="fas fa-city"></i></div>
-            
-            <div class="realm-description">
-                <p>Chegue ao nível máximo na Cidade Reluzente! Apenas os verdadeiros Mestres do Sorriso alcançam este reino.</p>
-            </div>
-            
-            <div class="text-center p-4">
-                <h5><i class="fas fa-lock"></i> Complete o Reino 3 para desbloquear!</h5>
-                <p>Domine todas as técnicas para se tornar um Guardião do Sorriso</p>
-            </div>
-        </div>
-        
-        <!-- Rodapé do Álbum -->
         <div class="album-footer">
-            <p>Jornada do Guardião do Sorriso | Colecione todos os selos para salvar o reino!</p>
+            <p>Jornada do Guardião do Sorriso | Colecione todos os 28 selos para completar a missão!</p>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Simulação de interação com o álbum
+        // Navegação entre páginas
+        let currentPage = 1;
+        const pages = document.querySelectorAll('.album-page');
+        const dots = document.querySelectorAll('.page-dot');
+        
+        function showPage(pageNumber) {
+            pages.forEach(page => page.style.display = 'none');
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            document.querySelector(`.page-${pageNumber}`).style.display = 'block';
+            document.querySelector(`.page-dot[data-page="${pageNumber}"]`).classList.add('active');
+            currentPage = pageNumber;
+        }
+        
+        // Mostrar primeira página inicialmente
+        showPage(1);
+        
+        // Event listeners para navegação
+        document.querySelector('.next-btn').addEventListener('click', () => {
+            if(currentPage < 4) showPage(currentPage + 1);
+        });
+        
+        document.querySelector('.prev-btn').addEventListener('click', () => {
+            if(currentPage > 1) showPage(currentPage - 1);
+        });
+        
+        // Navegação pelos dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                showPage(parseInt(dot.dataset.page));
+            });
+        });
+        
+        // Interação com selos
         document.querySelectorAll('.sticker-slot').forEach(slot => {
             slot.addEventListener('click', function() {
-                if(!this.classList.contains('sticker-collected') && 
-                   !this.classList.contains('text-muted')) {
+                if(!this.classList.contains('sticker-collected')) {
                     this.classList.add('sticker-collected');
                     
-                    // Atualizar progresso
-                    const collected = document.querySelectorAll('.sticker-collected').length;
-                    const total = document.querySelectorAll('.sticker-slot:not(.text-muted)').length;
-                    const progress = Math.min(100, Math.round((collected / total) * 100));
-                    
-                    document.querySelector('.progress-bar').style.width = progress + '%';
-                    document.querySelector('.progress-bar').textContent = progress + '% Completo';
-                    
-                    // Verificar conquistas
-                    if(collected === 5) {
-                        document.querySelector('.medal:nth-child(1)').classList.add('medal-earned');
-                        alert('Parabéns! Você conquistou a Medalha de Bronze!');
-                    }
+                    // Efeito visual adicional
+                    this.style.animation = 'pulse 1s';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 1000);
                 }
             });
         });

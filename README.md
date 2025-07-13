@@ -1,4 +1,4 @@
-'''graph TD
+graph TD
     subgraph "Frontend Layer"
         A1[Web Application]
         A2[Mobile Application]

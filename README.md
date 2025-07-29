@@ -1,71 +1,30 @@
-graph TD
-    subgraph "Frontend Layer"
-        A1[Web Application]
-        A2[Mobile Application]
-        A3[Admin Dashboard]
-    end
+```mermaid
+sequenceDiagram
+    participant API as API REST
+    participant Mongo as MongoDB
+    participant ChangeStream as Change Stream Listener
+    participant Orchestrator as Orquestrador
+    participant Payment as Serviço de Pagamento
+    participant Inventory as Serviço de Estoque
+    participant Shipping as Serviço de Entrega
 
-    subgraph "API Gateway"
-        B1[API Gateway/Load Balancer]
-        B2[Authentication Service]
-        B3[Rate Limiting]
-    end
+    API->>Mongo: Cria novo pedido (status: CREATED)
+    Mongo-->>ChangeStream: Evento de inserção detectado
+    ChangeStream->>Orchestrator: Notifica novo pedido
 
-    subgraph "Core Services"
-        C1[Plate Registry Service]
-        C2[Invoice Service]
-        C3[Payment Service]
-        C4[Event Consumer Service]
-    end
+    Orchestrator->>Payment: Inicia pagamento
+    Payment->>Mongo: Atualiza status para PAID
+    Mongo-->>ChangeStream: Evento de atualização detectado
+    ChangeStream->>Orchestrator: Notifica status PAID
 
-    subgraph "External Services"
-        D1[Payment Provider API]
-        D2[Notification Service]
-        D3[Vehicle Registration API]
-    end
+    Orchestrator->>Inventory: Reserva estoque
+    Inventory->>Mongo: Atualiza status para STOCK_RESERVED
+    Mongo-->>ChangeStream: Evento de atualização detectado
+    ChangeStream->>Orchestrator: Notifica status STOCK_RESERVED
 
-    subgraph "Data Layer"
-        E1[PostgreSQL - Main DB]
-        E2[Redis - Cache]
-        E3[Message Queue - Kafka/RabbitMQ]
-    end
+    Orchestrator->>Shipping: Inicia envio
+    Shipping->>Mongo: Atualiza status para SHIPPED
+    Mongo-->>ChangeStream: Evento de atualização detectado
+    ChangeStream->>Orchestrator: Notifica status SHIPPED
 
-    subgraph "Infrastructure"
-        F1[Monitoring - Prometheus/Grafana]
-        F2[Logging - ELK Stack]
-        F3[Container Orchestration - K8s]
-    end
-
-    A1 --> B1
-    A2 --> B1
-    A3 --> B1
-    
-    B1 --> B2
-    B1 --> B3
-    B1 --> C1
-    B1 --> C2
-    B1 --> C3
-    
-    C1 --> E1
-    C1 --> E2
-    C2 --> E1
-    C2 --> E2
-    C3 --> E1
-    C3 --> E3
-    
-    C4 --> E3
-    C4 --> C2
-    C4 --> C3
-    
-    C3 --> D1
-    C4 --> D2
-    C1 --> D3
-    
-    C1 --> F1
-    C2 --> F1
-    C3 --> F1
-    C4 --> F1
-    
-    E1 --> F2
-    E2 --> F2
-    E3 --> F2
+    Orchestrator->>Mongo: Atualiza status final para COMPLETED

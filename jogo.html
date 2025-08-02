@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mini Minecraft com Emojis</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #eef;
+      font-family: Arial, sans-serif;
+      user-select: none;
+    }
+
+    #game-container {
+      width: 1200px;
+      height: 600px;
+      border: 3px solid #333;
+      background: linear-gradient(#87CEEB 70%, #228B22 30%);
+      margin: 30px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #character {
+      font-size: 50px;
+      position: absolute;
+      bottom: 30px;
+      left: 100px;
+      z-index: 2;
+    }
+
+    .monster {
+      font-size: 50px;
+      position: absolute;
+      bottom: 30px;
+      z-index: 1;
+    }
+
+    .flying {
+      bottom: 180px;
+    }
+
+    .power {
+      font-size: 24px;
+      position: absolute;
+      z-index: 3;
+    }
+
+    #life-bar {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    #life-bar span {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<audio controls autoplay>
+  <source src="mario.mp3" type="audio/mpeg" >
+  Seu navegador não suporta o elemento de áudio.
+</audio>
+  <div class="container text-center">
+    <h2 class="mt-4">Mini Minecraft com Emojis</h2>
+    <p>← → mover | ↑ pular | Espaço atirar (5s)</p>
+    <div id="life-bar">Vida: <span id="life">❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</span></div>
+    <div id="game-container">
+      <div id="character">🧍</div>
+    </div>
+  </div>
+
+  <script>
+    const character = document.getElementById("character");
+    const game = document.getElementById("game-container");
+    const lifeSpan = document.getElementById("life");
+    let life = 10;
+    let position = 100;
+    let vertical = 30;
+    let isJumping = false;
+    let canShoot = true;
+    const monsters = [];
+    const monsterEmojis = ['🧟', '💀', '🐉', '🕷'];
+    let monsterId = 0;
+
+    // Movimentação do personagem
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight") {
+        position = Math.min(position + 10, 750);
+        character.style.left = position + "px";
+      } else if (e.key === "ArrowLeft") {
+        position = Math.max(position - 10, 0);
+        character.style.left = position + "px";
+      } else if (e.key === "ArrowUp") {
+        jump();
+      } else if (e.code === "Space") {
+        if (canShoot) {
+          shoot();
+          canShoot = false;
+          setTimeout(() => canShoot = true, 5000);
+        }
+      }
+    });
+
+    function jump() {
+      if (isJumping) return;
+      isJumping = true;
+      let height = 0;
+      const up = setInterval(() => {
+        if (height >= 300) {
+          clearInterval(up);
+          const down = setInterval(() => {
+            if (height <= 0) {
+              clearInterval(down);
+              isJumping = false;
+            } else {
+              height -= 5;
+              character.style.bottom = (vertical + height) + "px";
+            }
+          }, 20);
+        } else {
+          height += 5;
+          character.style.bottom = (vertical + height) + "px";
+        }
+      }, 20);
+    }
+
+    function shoot() {
+      const power = document.createElement("div");
+      power.className = "power";
+      power.textContent = "💥";
+      power.style.left = (position + 40) + "px";
+      power.style.bottom = character.style.bottom || "30px";
+      game.appendChild(power);
+
+      let x = position + 40;
+      const interval = setInterval(() => {
+        x += 5;
+        power.style.left = x + "px";
+
+        monsters.forEach(monster => {
+          if (monster && checkCollision(power, monster.el)) {
+            game.removeChild(monster.el);
+            monster.dead = true;
+            clearInterval(interval);
+            power.remove();
+          }
+        });
+
+        if (x > 800) {
+          clearInterval(interval);
+          power.remove();
+        }
+      }, 20);
+    }
+
+    function spawnMonster() {
+      const emoji = monsterEmojis[Math.floor(Math.random() * monsterEmojis.length)];
+      const el = document.createElement("div");
+      el.className = "monster";
+      el.textContent = emoji;
+      let y = 30;
+      if (Math.random() < 0.25) {
+        el.classList.add("flying");
+        y = 180;
+      }
+      const x = 800;
+      game.appendChild(el);
+
+      const m = {
+        id: "m" + monsterId++,
+        el,
+        x,
+        y,
+        dead: false
+      };
+
+      monsters.push(m);
+    }
+
+    function moveMonsters() {
+      monsters.forEach(monster => {
+        if (monster.dead) return;
+        monster.x -= 1.5;
+        monster.el.style.left = monster.x + "px";
+
+        if (monster.x < -50) {
+          if (!isJumping && monster.y === 30) {
+            life = Math.max(0, life - 1);
+            updateLife();
+          }
+          monster.el.remove();
+          monster.dead = true;
+        }
+
+        if (checkCollision(character, monster.el) && !isJumping && monster.y === 30) {
+          life = Math.max(0, life - 1);
+          updateLife();
+          monster.el.remove();
+          monster.dead = true;
+        }
+      });
+    }
+
+    function updateLife() {
+      lifeSpan.textContent = "❤️".repeat(life);
+      if (life <= 0) {
+        alert("Game Over");
+        location.reload();
+      }
+    }
+
+    function checkCollision(a, b) {
+      const r1 = a.getBoundingClientRect();
+      const r2 = b.getBoundingClientRect();
+      return !(r1.right < r2.left || r1.left > r2.right || r1.bottom < r2.top || r1.top > r2.bottom);
+    }
+
+    // Inicialização
+    setInterval(() => spawnMonster(), 10000); // Novo monstro a cada 10s
+    setInterval(() => moveMonsters(), 20);     // Movimento dos monstros
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CuraCycle Uberlândia – Dr. Fausto & Colgate</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ──────────────────────────────────────────
+       Design tokens – CuraCycle brand colours
+    ────────────────────────────────────────── */
+    :root {
+      --brand-red:    #e3001b;
+      --brand-dark:   #1a1a2e;
+      --brand-light:  #fff5f5;
+      --brand-grey:   #f4f6f8;
+      --brand-accent: #ff6b6b;
+      --section-pad:  4rem 0;
+    }
+
+    /* ── Reset / Base ── */
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    /* ── Utility ── */
+    .text-brand   { color: var(--brand-red) !important; }
+    .bg-brand     { background-color: var(--brand-red) !important; }
+    .bg-brand-light { background-color: var(--brand-light) !important; }
+    .bg-grey      { background-color: var(--brand-grey) !important; }
+
+    /* ── Navbar ── */
+    .navbar {
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-brand img {
+      height: 48px;
+      object-fit: contain;
+    }
+    .nav-link {
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: var(--brand-red) !important;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--brand-red) 0%, #8b0000 100%);
+      color: #fff;
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+      pointer-events: none;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
+    .hero .lead { font-size: clamp(1rem, 2.5vw, 1.3rem); opacity: .9; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: .45rem 1.2rem;
+      font-size: .9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Section headings ── */
+    .section-title {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -8px;
+      width: 60px; height: 4px;
+      background: var(--brand-red);
+      border-radius: 4px;
+    }
+    .section-title.centered::after {
+      left: 50%; transform: translateX(-50%);
+    }
+
+    /* ── Step cards ── */
+    .step-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      height: 100%;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .step-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.12);
+    }
+    .step-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--brand-light);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-size: 1.8rem;
+      color: var(--brand-red);
+    }
+    .step-number {
+      width: 32px; height: 32px;
+      background: var(--brand-red);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: .9rem;
+      margin-bottom: .75rem;
+    }
+
+    /* ── Info boxes ── */
+    .info-box {
+      border-left: 4px solid var(--brand-red);
+      background: #fff;
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+
+    /* ── Video container ── */
+    .video-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,.15);
+    }
+
+    /* ── Prize list ── */
+    .prize-list li {
+      padding: .55rem 0;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+    }
+    .prize-list li:last-child { border-bottom: none; }
+    .prize-list .bullet {
+      color: var(--brand-red);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Rules list ── */
+    .rules-list .list-group-item {
+      border-left: 4px solid var(--brand-red);
+      border-radius: 8px !important;
+      margin-bottom: .6rem;
+      padding: .85rem 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+
+    /* ── CTA button ── */
+    .btn-cta {
+      background: var(--brand-red);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: .85rem 2.5rem;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(227,0,27,.35);
+      color: #fff;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--brand-dark);
+    }
+    footer a { color: rgba(255,255,255,.7); }
+    footer a:hover { color: #fff; }
+
+    /* ── Scroll-to-top ── */
+    #backToTop {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--brand-red);
+      color: #fff;
+      border: none;
+      display: none;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.25);
+      z-index: 999;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    #backToTop.show { display: flex; }
+
+    /* ── Responsive tweaks ── */
+    @media (max-width: 768px) {
+      .hero { padding: 3.5rem 0; }
+      :root { --section-pad: 3rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  NAVBAR                          ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+      <!-- Brand / Logo -->
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="20" fill="#e3001b"/>
+          <path d="M12 20c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z" fill="white" fill-opacity=".25"/>
+          <path d="M17 20l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="fw-bold text-dark" style="font-size:1.1rem">CuraCycle<span class="text-brand"> UDI</span></span>
+      </a>
+
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li class="nav-item"><a class="nav-link" href="#como-participar">Como Participar</a></li>
+          <li class="nav-item"><a class="nav-link" href="#curacycle">CuraCycle</a></li>
+          <li class="nav-item"><a class="nav-link" href="#premio">Prêmio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#regras">Regras</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  HERO                            ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section class="hero text-center">
+    <div class="container position-relative">
+      <span class="hero-badge">
+        <i class="fas fa-recycle"></i> Programa de Reciclagem Colgate
+      </span>
+      <h1 class="mb-3">Dr. Fausto &amp; CuraCycle</h1>
+      <p class="lead mb-4 mx-auto" style="max-width:620px">
+        Doe seus itens odontológicos usados e ajude a construir um futuro mais sustentável para Uberlândia e o planeta!
+      </p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <a href="#como-participar" class="btn-cta">
+          <i class="fas fa-hand-holding-heart me-2"></i>Participe Agora
+        </a>
+        <a href="#curacycle" class="btn btn-outline-light btn-lg rounded-pill px-4">
+          Saiba Mais
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  SOBRE                           ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section id="sobre" style="padding: var(--section-pad)">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <!-- Texto -->
+        <div class="col-lg-6">
+          <h2 class="section-title text-brand">Por que participar?</h2>
+          <p class="mt-4">
+            A campanha promovida pelo <strong>Dr. Fausto</strong> em parceria com a <strong>Colgate CuraCycle</strong>
+            busca incentivar a sustentabilidade e dar o destino correto para itens odontológicos usados em
+            <strong>Uberlândia – MG</strong>.
+          </p>
+          <p>
+            Cada escova, frasco de creme dental, mordedor ou interdental descartado corretamente é transformado em
+            novos produtos — e você ainda concorre a prêmios incríveis!
+          </p>
+          <div class="info-box mt-4">
+            <i class="fas fa-map-marker-alt text-brand me-2"></i>
+            <strong>Ponto de Coleta:</strong><br>
+            Consultório Dr. Fausto — Uberlândia, MG
+          </div>
+          <div class="info-box">
+            <i class="fas fa-calendar-alt text-brand me-2"></i>
+            <strong>Período:</strong> 01/05/2025 a 30/12/2025
+          </div>
+        </div>
+
+        <!-- Cards de destaque -->
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="card border-0 text-center p-3 h-100" style="background:var(--brand-light);border-radius:16px">
+                <i class="fas fa-leaf fa-2x text-brand mb-2"></i>
+                <h6 class="fw-bold mb-1">Sustentabilidade</h6>
+                <p class="small text-muted mb-0">Descarte consciente para o planeta</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card border-0 text-center p-3 h-100" style="background:var(--brand-light);border-radius:16px">
+                <i class="fas fa-gift fa-2x text-brand mb-2"></i>
+                <h6 class="fw-bold mb-1">Prêmios</h6>
+                <p class="small text-muted mb-0">Concorra a escova elétrica Colgate</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card border-0 text-center p-3 h-100" style="background:var(--brand-light);border-radius:16px">
+                <i class="fas fa-heartbeat fa-2x text-brand mb-2"></i>
+                <h6 class="fw-bold mb-1">Saúde Bucal</h6>
+                <p class="small text-muted mb-0">Acesso a cuidados para todos</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card border-0 text-center p-3 h-100" style="background:var(--brand-light);border-radius:16px">
+                <i class="fas fa-hands-helping fa-2x text-brand mb-2"></i>
+                <h6 class="fw-bold mb-1">Comunidade</h6>
+                <p class="small text-muted mb-0">Apoio à ONG Amigo da Vez</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  COMO PARTICIPAR                 ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section id="como-participar" class="bg-grey" style="padding: var(--section-pad)">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title text-brand centered">Como Participar</h2>
+        <p class="text-muted mt-4">É simples! Siga os 3 passos abaixo e já concorra:</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Passo 1 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">1</div>
+            <div class="step-icon">
+              <i class="fas fa-tooth"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Recolha</h5>
+            <p class="text-muted">
+              Separe itens de higiene bucal usados: <strong>escovas de dente</strong>, creme dental,
+              mordedores e raspadores de língua (de qualquer marca).
+            </p>
+          </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">2</div>
+            <div class="step-icon">
+              <i class="fas fa-box-open"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Entregue</h5>
+            <p class="text-muted">
+              Leve os itens ao ponto de coleta:<br>
+              <strong>Consultório Dr. Fausto</strong><br>Uberlândia – MG
+            </p>
+          </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="step-card text-center">
+            <div class="step-number mx-auto">3</div>
+            <div class="step-icon">
+              <i class="fas fa-ticket-alt"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Concorra</h5>
+            <p class="text-muted">
+              Cada item entregue gera <strong>um cupom</strong> para o sorteio de uma
+              <strong>escova elétrica Colgate SonicPro10!</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner CTA -->
+      <div class="text-center mt-5">
+        <div class="d-inline-block bg-brand text-white rounded-3 px-4 py-3">
+          <i class="fas fa-info-circle me-2"></i>
+          Aceitos itens de <strong>qualquer marca</strong> — não precisa ser Colgate!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  O QUE É CURACYCLE               ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section id="curacycle" style="padding: var(--section-pad)">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <!-- Texto -->
+        <div class="col-lg-6 order-lg-1 order-2">
+          <h2 class="section-title text-brand">O que é CuraCycle?</h2>
+          <p class="mt-4">
+            Profissionais que dedicam sua vida, tempo e amor para trazer saúde para todos os brasileiros e, agora,
+            estão engajados neste projeto. Com pontos de coleta de escovas dentais usadas, frascos de cremes dentais,
+            interdentais e mordedores, de qualquer marca, promovem o descarte adequado nas caixas coletoras,
+            praticando sustentabilidade com responsabilidade.
+          </p>
+          <p>
+            Além disso, apoiam a <strong>ONG Amigo da Vez</strong>, uma organização sem fins lucrativos que busca
+            levar à população mais carente atividades socioeducativas de orientação em higiene oral e atendimento
+            odontológico.
+          </p>
+          <a href="https://www.colgate.com.br/curacycle" target="_blank" rel="noopener noreferrer"
+             class="btn-cta mt-2">
+            <i class="fas fa-external-link-alt me-2"></i>Conheça o Programa
+          </a>
+        </div>
+
+        <!-- Vídeo -->
+        <div class="col-lg-6 order-lg-2 order-1">
+          <div class="video-wrapper ratio ratio-16x9">
+            <iframe
+              src="https://www.youtube.com/embed/hJ_ZIdbhATY"
+              title="O que é CuraCycle?"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  REGRAS                          ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section id="regras" class="bg-grey" style="padding: var(--section-pad)">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title text-brand centered">Regras da Campanha</h2>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <ul class="rules-list list-group list-group-flush">
+            <li class="list-group-item">
+              <i class="fas fa-calendar-check text-brand me-2"></i>
+              <strong>Período:</strong> 01/05/2025 a 30/12/2025.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-tooth text-brand me-2"></i>
+              <strong>Itens válidos:</strong> escovas de dente, creme dental, mordedores e raspadores de língua
+              (de qualquer marca).
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-ticket-alt text-brand me-2"></i>
+              <strong>Cupons:</strong> cada item entregue equivale a um cupom no sorteio.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-trophy text-brand me-2"></i>
+              <strong>Sorteio:</strong> 05/01/2026. O resultado será divulgado nas redes sociais do Dr. Fausto.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-map-marker-alt text-brand me-2"></i>
+              <strong>Local de entrega:</strong> Consultório Dr. Fausto — Uberlândia, MG.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  PRÊMIO                          ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section id="premio" style="padding: var(--section-pad)">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title text-brand centered">O Prêmio</h2>
+        <p class="text-muted mt-4 mx-auto" style="max-width:520px">
+          Concorra a uma <strong>Colgate SonicPro10</strong> — a escova elétrica que recomendamos!
+        </p>
+      </div>
+
+      <div class="row align-items-center g-5">
+        <!-- Lista de benefícios -->
+        <div class="col-lg-6">
+          <ul class="prize-list list-unstyled">
+            <li>
+              <span class="bullet"><i class="fas fa-circle-check fa-lg"></i></span>
+              <span>Remove <strong>200% mais placa</strong> em comparação com escova de dentes manual.</span>
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-circle-check fa-lg"></i></span>
+              <span>Produz <strong>31.000 movimentos por minuto</strong> — 2 minutos equivalem a 1 mês de escovação manual.</span>
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-circle-check fa-lg"></i></span>
+              <span><strong>Temporizador inteligente de 2 minutos</strong>, recomendado por dentistas.</span>
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-circle-check fa-lg"></i></span>
+              <span>Vibrações de <strong>4 tempos</strong>, com pausas rápidas a cada 30 segundos para garantir limpeza completa.</span>
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-circle-check fa-lg"></i></span>
+              <span>Design ergonômico e <strong>bateria de longa duração</strong>.</span>
+            </li>
+          </ul>
+
+          <div class="mt-4 p-3 rounded-3" style="background:var(--brand-light)">
+            <p class="mb-0 small">
+              <i class="fas fa-star text-warning me-1"></i>
+              <strong>Nota:</strong> a escova será entregue ao ganhador após confirmação do sorteio em 05/01/2026.
+            </p>
+          </div>
+        </div>
+
+        <!-- Vídeo do prêmio -->
+        <div class="col-lg-6">
+          <div class="video-wrapper ratio ratio-16x9">
+            <iframe
+              src="https://www.youtube.com/embed/tNO1a_y9Dk0"
+              title="Colgate SonicPro10"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  CONTATO                         ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <section id="contato" class="bg-brand text-white text-center" style="padding: var(--section-pad)">
+    <div class="container">
+      <h2 class="mb-2 fw-bold">Fale com a gente</h2>
+      <p class="lead opacity-75 mb-4">Dúvidas? Entre em contato pelo Instagram do Dr. Fausto em Uberlândia.</p>
+
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="https://instagram.com/doutorfausto.udi" target="_blank" rel="noopener noreferrer"
+           class="btn btn-outline-light btn-lg rounded-pill px-4">
+          <i class="fab fa-instagram me-2"></i>@doutorfausto.udi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════╗ -->
+  <!-- ║  RODAPÉ                          ║ -->
+  <!-- ╚══════════════════════════════════╝ -->
+  <footer class="text-white py-4">
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">© 2025 Campanha Dr. Fausto &amp; CuraCycle Uberlândia. Todos os direitos reservados.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <span class="text-white-50 small">Termos e Condições | Política de Privacidade</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top button -->
+  <button id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Back-to-top visibility
+    const btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('show', window.scrollY > 300);
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Active nav link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              'text-brand',
+              link.getAttribute('href') === '#' + entry.target.id
+            );
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
